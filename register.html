@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - PAFS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="ms-9 fw-bold text-primary fs-2">PAFS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pets.html">Find a Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="foster.html">Foster</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="text-center mb-4">
+                                <h2>Create Your Account</h2>
+                                <p class="text-muted">Join our community and help make a difference in the lives of pets in need.</p>
+                            </div>
+                            <form id="registrationForm" class="needs-validation" novalidate>
+                                <!-- Account Type -->
+                                <div class="mb-4">
+                                    <label class="form-label">I am registering as a:</label>
+                                    <div class="row g-3">
+                                        <div class="col-6 col-md-3">
+                                            <input type="radio" class="btn-check" name="accountType" id="adopter" value="adopter" checked required>
+                                            <label class="btn btn-outline-primary w-100" for="adopter">
+                                                <i class="bi bi-house-heart mb-2 d-block fs-4"></i>
+                                                Adopter
+                                            </label>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <input type="radio" class="btn-check" name="accountType" id="foster" value="foster" required>
+                                            <label class="btn btn-outline-primary w-100" for="foster">
+                                                <i class="bi bi-heart mb-2 d-block fs-4"></i>
+                                                Foster Parent
+                                            </label>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <input type="radio" class="btn-check" name="accountType" id="volunteer" value="volunteer" required>
+                                            <label class="btn btn-outline-primary w-100" for="volunteer">
+                                                <i class="bi bi-people mb-2 d-block fs-4"></i>
+                                                Volunteer
+                                            </label>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <input type="radio" class="btn-check" name="accountType" id="shelter" value="shelter" required>
+                                            <label class="btn btn-outline-primary w-100" for="shelter">
+                                                <i class="bi bi-building mb-2 d-block fs-4"></i>
+                                                Shelter/Rescue
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Personal Information -->
+                                <h5 class="mb-3">Personal Information</h5>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your first name.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your last name.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your phone number.
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your address.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="city" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your city.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="state" class="form-label">State</label>
+                                        <select class="form-select" id="state" required>
+                                            <option value="" selected disabled>Select State</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <!-- Add all states here -->
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your state.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="zipCode" class="form-label">Zip Code</label>
+                                        <input type="text" class="form-control" id="zipCode" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your zip code.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Account Information -->
+                                <h5 class="mb-3">Account Information</h5>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" required>
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.
+                                        </div>
+                                        <div class="form-text">
+                                            Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmPassword" required>
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Passwords do not match.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Information (conditional based on account type) -->
+                                <div id="adopterInfo" class="additional-info mb-4">
+                                    <h5 class="mb-3">Adopter Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="housingType" class="form-label">Housing Type</label>
+                                            <select class="form-select" id="housingType">
+                                                <option value="" selected disabled>Select Housing Type</option>
+                                                <option value="house">House</option>
+                                                <option value="apartment">Apartment</option>
+                                                <option value="condo">Condo</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ownRent" class="form-label">Do you own or rent?</label>
+                                            <select class="form-select" id="ownRent">
+                                                <option value="" selected disabled>Select Option</option>
+                                                <option value="own">Own</option>
+                                                <option value="rent">Rent</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Do you have any pets currently?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsYes" value="yes">
+                                                <label class="form-check-label" for="hasPetsYes">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsNo" value="no">
+                                                <label class="form-check-label" for="hasPetsNo">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12" id="currentPetsInfo" style="display: none;">
+                                            <label for="currentPets" class="form-label">Please describe your current pets:</label>
+                                            <textarea class="form-control" id="currentPets" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="fosterInfo" class="additional-info mb-4" style="display: none;">
+                                    <h5 class="mb-3">Foster Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="fosterExperience" class="form-label">Foster Experience</label>
+                                            <select class="form-select" id="fosterExperience">
+                                                <option value="" selected disabled>Select Experience Level</option>
+                                                <option value="none">None</option>
+                                                <option value="beginner">Beginner (0-1 year)</option>
+                                                <option value="intermediate">Intermediate (1-3 years)</option>
+                                                <option value="experienced">Experienced (3+ years)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fosterAvailability" class="form-label">Availability</label>
+                                            <select class="form-select" id="fosterAvailability">
+                                                <option value="" selected disabled>Select Availability</option>
+                                                <option value="short-term">Short-term (1-4 weeks)</option>
+                                                <option value="medium-term">Medium-term (1-3 months)</option>
+                                                <option value="long-term">Long-term (3+ months)</option>
+                                                <option value="emergency">Emergency only</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">What types of animals are you willing to foster?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="fosterDogs">
+                                                <label class="form-check-label" for="fosterDogs">
+                                                    Dogs
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="fosterCats">
+                                                <label class="form-check-label" for="fosterCats">
+                                                    Cats
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="fosterSmallAnimals">
+                                                <label class="form-check-label" for="fosterSmallAnimals">
+                                                    Small Animals (rabbits, guinea pigs, etc.)
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="fosterSpecialNeeds">
+                                                <label class="form-check-label" for="fosterSpecialNeeds">
+                                                    Special Needs Animals
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="volunteerInfo" class="additional-info mb-4" style="display: none;">
+                                    <h5 class="mb-3">Volunteer Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="volunteerAvailability" class="form-label">Availability</label>
+                                            <select class="form-select" id="volunteerAvailability">
+                                                <option value="" selected disabled>Select Availability</option>
+                                                <option value="weekdays">Weekdays</option>
+                                                <option value="weekends">Weekends</option>
+                                                <option value="both">Both</option>
+                                                <option value="flexible">Flexible</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="volunteerHours" class="form-label">Hours per week</label>
+                                            <select class="form-select" id="volunteerHours">
+                                                <option value="" selected disabled>Select Hours</option>
+                                                <option value="1-5">1-5 hours</option>
+                                                <option value="5-10">5-10 hours</option>
+                                                <option value="10+">10+ hours</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">What volunteer activities are you interested in?</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="volunteerAnimalCare">
+                                                <label class="form-check-label" for="volunteerAnimalCare">
+                                                    Animal Care
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="volunteerEvents">
+                                                <label class="form-check-label" for="volunteerEvents">
+                                                    Events & Fundraising
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="volunteerAdmin">
+                                                <label class="form-check-label" for="volunteerAdmin">
+                                                    Administrative Support
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="volunteerTransport">
+                                                <label class="form-check-label" for="volunteerTransport">
+                                                    Animal Transport
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="volunteerSkills" class="form-label">Do you have any special skills or experience that would be helpful?</label>
+                                            <textarea class="form-control" id="volunteerSkills" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="shelterInfo" class="additional-info mb-4" style="display: none;">
+                                    <h5 class="mb-3">Shelter/Rescue Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="organizationName" class="form-label">Organization Name</label>
+                                            <input type="text" class="form-control" id="organizationName">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="organizationType" class="form-label">Organization Type</label>
+                                            <select class="form-select" id="organizationType">
+                                                <option value="" selected disabled>Select Type</option>
+                                                <option value="shelter">Animal Shelter</option>
+                                                <option value="rescue">Rescue Group</option>
+                                                <option value="sanctuary">Animal Sanctuary</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="taxId" class="form-label">Tax ID/EIN (if applicable)</label>
+                                            <input type="text" class="form-control" id="taxId">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="organizationWebsite" class="form-label">Website (if applicable)</label>
+                                            <input type="url" class="form-control" id="organizationWebsite">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="organizationDescription" class="form-label">Organization Description</label>
+                                            <textarea class="form-control" id="organizationDescription" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Terms and Conditions -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                        <label class="form-check-label" for="termsCheck">
+                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree to the terms and conditions.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Newsletter Subscription -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletterCheck">
+                                        <label class="form-check-label" for="newsletterCheck">
+                                            Subscribe to our newsletter for updates on adoptable pets, events, and more.
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" type="submit">Create Account</button>
+                                </div>
+                            </form>
+
+                            <div class="text-center mt-4">
+                                <p>Already have an account? <a href="login.html">Log in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Acceptance of Terms</h6>
+                    <p>By registering for an account with the Pet Adoption and Foster System (PAFS), you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not register or use our services.</p>
+                    
+                    <h6>2. Account Registration</h6>
+                    <p>You must provide accurate, current, and complete information during the registration process. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+                    
+                    <h6>3. User Conduct</h6>
+                    <p>You agree to use our services only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                    <ul>
+                        <li>Provide false or misleading information</li>
+                        <li>Use the service for any illegal purpose</li>
+                        <li>Harass, abuse, or harm another person</li>
+                        <li>Impersonate any person or entity</li>
+                        <li>Interfere with or disrupt the service</li>
+                    </ul>
+                    
+                    <h6>4. Adoption and Foster Policies</h6>
+                    <p>All adoptions and foster arrangements are subject to approval by PAFS. We reserve the right to deny any application based on our assessment of the best interests of the animals in our care.</p>
+                    
+                    <h6>5. User Content</h6>
+                    <p>By submitting content to our platform, you grant PAFS a non-exclusive, royalty-free license to use, reproduce, modify, and display such content in connection with our services.</p>
+                    
+                    <h6>6. Termination</h6>
+                    <p>We reserve the right to terminate or suspend your account at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.</p>
+                    
+                    <h6>7. Changes to Terms</h6>
+                    <p>We may modify these Terms at any time. Your continued use of our services after any changes indicates your acceptance of the modified Terms.</p>
+                    
+                    <h6>8. Disclaimer of Warranties</h6>
+                    <p>Our services are provided "as is" without warranties of any kind, either express or implied.</p>
+                    
+                    <h6>9. Limitation of Liability</h6>
+                    <p>PAFS shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.</p>
+                    
+                    <h6>10. Governing Law</h6>
+                    <p>These Terms shall be governed by the laws of the state in which PAFS operates, without regard to its conflict of law provisions.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Information We Collect</h6>
+                    <p>We collect personal information that you provide to us, including but not limited to your name, email address, phone number, address, and other information relevant to adoption, fostering, or volunteering.</p>
+                    
+                    <h6>2. How We Use Your Information</h6>
+                    <p>We use your information to:</p>
+                    <ul>
+                        <li>Process adoption and foster applications</li>
+                        <li>Communicate with you about our services</li>
+                        <li>Coordinate volunteer activities</li>
+                        <li>Improve our services</li>
+                        <li>Send newsletters and updates (if you opt in)</li>
+                    </ul>
+                    
+                    <h6>3. Information Sharing</h6>
+                    <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except as necessary to provide our services or as required by law.</p>
+                    
+                    <h6>4. Data Security</h6>
+                    <p>We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
+                    
+                    <h6>5. Cookies</h6>
+                    <p>We use cookies to enhance your experience on our site. You can set your browser to refuse all or some browser cookies, but this may prevent some parts of our site from functioning properly.</p>
+                    
+                    <h6>6. Third-Party Links</h6>
+                    <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these sites.</p>
+                    
+                    <h6>7. Children's Privacy</h6>
+                    <p>Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children.</p>
+                    
+                    <h6>8. Changes to Privacy Policy</h6>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                    
+                    <h6>9. Your Rights</h6>
+                    <p>Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data.</p>
+                    
+                    <h6>10. Contact Us</h6>
+                    <p>If you have any questions about this Privacy Policy, please contact us at privacy@pafs.org.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="successModalLabel">Registration Successful!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="bi bi-check-circle-fill text-success display-1 mb-4"></i>
+                    <h4>Thank You for Registering!</h4>
+                    <p>Your account has been created successfully. A confirmation email has been sent to your email address with instructions to verify your account.
+                    </p>
+                    <p>Please check your inbox and follow the verification link to activate your account.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="login.html" class="btn btn-primary">Go to Login</a>
+                    <a href="index.html" class="btn btn-outline-primary">Return to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5>Pet Adoption and Foster System</h5>
+                    <p>Connecting pets with loving homes since 2023.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="pets.html" class="text-white">Find a Pet</a></li>
+                        <li><a href="foster.html" class="text-white">Foster</a></li>
+                        <li><a href="resources.html" class="text-white">Resources</a></li>
+                        <li><a href="about.html" class="text-white">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Pet Care Tips</a></li>
+                        <li><a href="#" class="text-white">Training Guides</a></li>
+                        <li><a href="#" class="text-white">FAQs</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on adoptable pets and events.</p>
+                    <form class="row g-2">
+                        <div class="col-8">
+                            <input type="email" class="form-control" placeholder="Email address">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 Pet Adoption and Foster System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (() => {
+            'use strict';
+
+            // Fetch all forms we want to apply validation to
+            const forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        event.preventDefault();
+                        // Show success modal
+                        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+
+            // Password confirmation validation
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+
+            confirmPassword.addEventListener('input', () => {
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.setCustomValidity('Passwords do not match.');
+                } else {
+                    confirmPassword.setCustomValidity('');
+                }
+            });
+
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+
+            togglePassword.addEventListener('click', () => {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                togglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+            });
+
+            toggleConfirmPassword.addEventListener('click', () => {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+                toggleConfirmPassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+            });
+
+            // Show/hide additional information based on account type
+            const accountTypeRadios = document.querySelectorAll('input[name="accountType"]');
+            const additionalInfoDivs = document.querySelectorAll('.additional-info');
+
+            function showRelevantInfo() {
+                const selectedType = document.querySelector('input[name="accountType"]:checked').value;
+                
+                additionalInfoDivs.forEach(div => {
+                    div.style.display = 'none';
+                });
+
+                document.getElementById(`${selectedType}Info`).style.display = 'block';
+            }
+
+            accountTypeRadios.forEach(radio => {
+                radio.addEventListener('change', showRelevantInfo);
+            });
+
+            // Show/hide current pets info based on selection
+            const hasPetsRadios = document.querySelectorAll('input[name="hasPets"]');
+            const currentPetsInfo = document.getElementById('currentPetsInfo');
+
+            hasPetsRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    currentPetsInfo.style.display = radio.value === 'yes' ? 'block' : 'none';
+                });
+            });
+
+            // Initialize the form
+            showRelevantInfo();
+        })();
+    </script>
+</body>
+</html>

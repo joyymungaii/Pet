@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter Pets - PAFS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="ms-9 fw-bold text-primary fs-2">PAFS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pets.html">Find a Pet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="foster.html">Foster</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shelter Header Section -->
+    <header class="py-4 bg-light border-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-2">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="pets.html">Find a Pet</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Paws & Hearts Animal Shelter</li>
+                        </ol>
+                    </nav>
+                    <div class="d-flex align-items-center">
+                        <img src="images/shelter-logo.png" alt="Paws & Hearts Animal Shelter" class="rounded-circle me-3" width="80" height="80">
+                        <div>
+                            <h1 class="mb-1">Paws & Hearts Animal Shelter</h1>
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-success me-2">Verified</span>
+                                <div class="text-warning me-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                                <span class="text-muted">(4.5, 128 reviews)</span>
+                            </div>
+                            <p class="text-muted mb-0">
+                                <i class="bi bi-geo-alt-fill me-1"></i> 123 Rescue Lane, Anytown, USA 12345
+                                <span class="mx-2">|</span>
+                                <i class="bi bi-telephone-fill me-1"></i> (555) 123-4567
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <a href="#" class="btn btn-outline-primary me-2">
+                        <i class="bi bi-heart me-1"></i> Save
+                    </a>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="bi bi-envelope me-1"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shelter Info Tabs -->
+    <div class="bg-white border-bottom">
+        <div class="container">
+            <ul class="nav nav-tabs border-0" id="shelterTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pets-tab" data-bs-toggle="tab" data-bs-target="#pets-tab-pane" type="button" role="tab" aria-controls="pets-tab-pane" aria-selected="true">Available Pets</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-tab-pane" type="button" role="tab" aria-controls="about-tab-pane" aria-selected="false">About</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="adoption-tab" data-bs-toggle="tab" data-bs-target="#adoption-tab-pane" type="button" role="tab" aria-controls="adoption-tab-pane" aria-selected="false">Adoption Process</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-5">
+        <div class="container">
+            <div class="tab-content" id="shelterTabsContent">
+                <!-- Available Pets Tab -->
+                <div class="tab-pane fade show active" id="pets-tab-pane" role="tabpanel" aria-labelledby="pets-tab" tabindex="0">
+                    <div class="row">
+                        <!-- Filters Sidebar -->
+                        <div class="col-lg-3 mb-4">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">Filter Pets</h5>
+                                    <form id="petFilterForm">
+                                        <!-- Search -->
+                                        <div class="mb-3">
+                                            <label for="searchPets" class="form-label">Search</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="searchPets" placeholder="Search pets...">
+                                                <button class="btn btn-outline-secondary" type="button">
+                                                    <i class="bi bi-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Species -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Species</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="speciesDog" checked>
+                                                <label class="form-check-label" for="speciesDog">
+                                                    Dogs
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="speciesCat" checked>
+                                                <label class="form-check-label" for="speciesCat">
+                                                    Cats
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="speciesSmallPets">
+                                                <label class="form-check-label" for="speciesSmallPets">
+                                                    Small Pets
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="speciesBirds">
+                                                <label class="form-check-label" for="speciesBirds">
+                                                    Birds
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Age -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Age</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="ageBaby" checked>
+                                                <label class="form-check-label" for="ageBaby">
+                                                    Baby
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="ageYoung" checked>
+                                                <label class="form-check-label" for="ageYoung">
+                                                    Young
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="ageAdult" checked>
+                                                <label class="form-check-label" for="ageAdult">
+                                                    Adult
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="ageSenior" checked>
+                                                <label class="form-check-label" for="ageSenior">
+                                                    Senior
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Size (for dogs) -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Size</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sizeSmall" checked>
+                                                <label class="form-check-label" for="sizeSmall">
+                                                    Small
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sizeMedium" checked>
+                                                <label class="form-check-label" for="sizeMedium">
+                                                    Medium
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sizeLarge" checked>
+                                                <label class="form-check-label" for="sizeLarge">
+                                                    Large
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gender -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="genderMale" checked>
+                                                <label class="form-check-label" for="genderMale">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="genderFemale" checked>
+                                                <label class="form-check-label" for="genderFemale">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Special Needs -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Special Considerations</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="specialNeeds">
+                                                <label class="form-check-label" for="specialNeeds">
+                                                    Special Needs
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="goodWithKids">
+                                                <label class="form-check-label" for="goodWithKids">
+                                                    Good with Kids
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="goodWithDogs">
+                                                <label class="form-check-label" for="goodWithDogs">
+                                                    Good with Dogs
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="goodWithCats">
+                                                <label class="form-check-label" for="goodWithCats">
+                                                    Good with Cats
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Reset and Apply Buttons -->
+                                        <div class="d-grid gap-2">
+                                            <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                                            <button type="reset" class="btn btn-outline-secondary" id="resetFilters">Reset Filters</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pets Grid -->
+                        <div class="col-lg-9">
+                            <!-- Sort and View Options -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <span class="text-muted">Showing 24 of 42 pets</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <label for="sortPets" class="form-label me-2 mb-0">Sort by:</label>
+                                    <select class="form-select form-select-sm me-3" id="sortPets" style="width: auto;">
+                                        <option value="recent">Recently Added</option>
+                                        <option value="name">Name (A-Z)</option>
+                                        <option value="age-asc">Age (Youngest First)</option>
+                                        <option value="age-desc">Age (Oldest First)</option>
+                                    </select>
+                                    <div class="btn-group" role="group" aria-label="View options">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm active" id="gridView">
+                                            <i class="bi bi-grid-3x3-gap-fill"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" id="listView">
+                                            <i class="bi bi-list-ul"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grid View (default) -->
+                            <div class="row g-4" id="petsGrid">
+                                <!-- Pet Card 1 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/dog1.jpg" class="card-img-top" alt="Buddy - Golden Retriever" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Buddy</h5>
+                                            <p class="text-muted small mb-2">Golden Retriever • Male • 2 years</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Friendly</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Trained</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Active</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Buddy is a friendly and energetic Golden Retriever who loves to play fetch and go for long walks.</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet Card 2 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/cat1.jpg" class="card-img-top" alt="Luna - Domestic Shorthair" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Luna</h5>
+                                            <p class="text-muted small mb-2">Domestic Shorthair • Female • 1 year</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Playful</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Affectionate</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Curious</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Luna is a sweet and curious cat who loves to explore and cuddle. She's great with other cats.</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet Card 3 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/dog2.jpg" class="card-img-top" alt="Max - Labrador Mix" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Max</h5>
+                                            <p class="text-muted small mb-2">Labrador Mix • Male • 3 years</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Gentle</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Good with Kids</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Loyal</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Max is a gentle and loyal companion who loves children and is great on a leash. He's house trained.</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet Card 4 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/cat2.jpg" class="card-img-top" alt="Oliver - Tabby" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Oliver</h5>
+                                            <p class="text-muted small mb-2">Tabby • Male • 4 years</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Independent</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Calm</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Lap Cat</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Oliver is a calm and independent cat who enjoys lounging in sunny spots and occasional lap time.</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet Card 5 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/dog3.jpg" class="card-img-top" alt="Bella - Beagle" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-warning position-absolute top-0 start-0 m-2">Pending</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Bella</h5>
+                                            <p class="text-muted small mb-2">Beagle • Female • 1 year</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Energetic</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Curious</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Playful</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Bella is a curious and energetic Beagle who loves to explore and play. She has a great nose!</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet Card 6 -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card h-100 border-0 shadow-sm pet-card">
+                                        <div class="position-relative">
+                                            <img src="images/rabbit1.jpg" class="card-img-top" alt="Thumper - Netherland Dwarf" style="height: 200px; object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                            <button class="btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2 favorite-btn">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-1">Thumper</h5>
+                                            <p class="text-muted small mb-2">Netherland Dwarf • Male • 2 years</p>
+                                            <div class="pet-tags mb-3">
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Gentle</span>
+                                                <span class="badge rounded-pill bg-light text-dark me-1">Quiet</span>
+                                                <span class="badge rounded-pill bg-light text-dark">Friendly</span>
+                                            </div>
+                                            <p class="card-text small mb-3">Thumper is a gentle and friendly rabbit who enjoys being handled and loves fresh vegetables.</p>
+                                            <a href="pet-details.html" class="btn btn-primary w-100">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- More pet cards would go here -->
+                            </div>
+
+                            <!-- List View (hidden by default) -->
+                            <div class="pet-list" id="petsList" style="display: none;">
+                                <!-- Pet List Item 1 -->
+                                <div class="card mb-3 border-0 shadow-sm">
+                                    <div class="row g-0">
+                                        <div class="col-md-3 position-relative">
+                                            <img src="images/dog1.jpg" class="img-fluid rounded-start h-100" alt="Buddy - Golden Retriever" style="object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-start">
+                                                    <div>
+                                                        <h5 class="card-title mb-1">Buddy</h5>
+                                                        <p class="text-muted small mb-2">Golden Retriever • Male • 2 years</p>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-secondary favorite-btn">
+                                                        <i class="bi bi-heart"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="pet-tags mb-2">
+                                                    <span class="badge rounded-pill bg-light text-dark me-1">Friendly</span>
+                                                    <span class="badge rounded-pill bg-light text-dark me-1">Trained</span>
+                                                    <span class="badge rounded-pill bg-light text-dark">Active</span>
+                                                </div>
+                                                <p class="card-text mb-3">Buddy is a friendly and energetic Golden Retriever who loves to play fetch and go for long walks. He's great with children and other dogs, and is fully house trained.</p>
+                                                <a href="pet-details.html" class="btn btn-primary">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pet List Item 2 -->
+                                <div class="card mb-3 border-0 shadow-sm">
+                                    <div class="row g-0">
+                                        <div class="col-md-3 position-relative">
+                                            <img src="images/cat1.jpg" class="img-fluid rounded-start h-100" alt="Luna - Domestic Shorthair" style="object-fit: cover;">
+                                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Available</span>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-start">
+                                                    <div>
+                                                        <h5 class="card-title mb-1">Luna</h5>
+                                                        <p class="text-muted small mb-2">Domestic Shorthair • Female • 1 year</p>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-secondary favorite-btn">
+                                                        <i class="bi bi-heart"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="pet-tags mb-2">
+                                                    <span class="badge rounded-pill bg-light text-dark me-1">Playful</span>
+                                                    <span class="badge rounded-pill bg-light text-dark me-1">Affectionate</span>
+                                                    <span class="badge rounded-pill bg-light text-dark">Curious</span>
+                                                </div>
+                                                <p class="card-text mb-3">Luna is a sweet and curious cat who loves to explore and cuddle. She's great with other cats and enjoys playing with toys. She's litter box trained and ready for her forever home.</p>
+                                                <a href="pet-details.html" class="btn btn-primary">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- More pet list items would go here -->
+                            </div>
+
+                            <!-- Pagination -->
+                            <nav aria-label="Pet listings pagination" class="mt-5">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="about-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3 class="mb-4">About Paws & Hearts Animal Shelter</h3>
+                            <p>Paws & Hearts Animal Shelter is a non-profit organization dedicated to rescuing, rehabilitating, and rehoming abandoned, abused, and neglected animals in our community. Founded in 2005, we have helped over 10,000 animals find their forever homes.</p>
+                            
+                            <p>Our mission is to provide a safe haven for animals in need, promote responsible pet ownership through education, and work towards ending pet overpopulation through spay/neuter programs.</p>
+                            
+                            <div class="row mt-5 mb-5">
+                                <div class="col-md-4 text-center mb-4 mb-md-0">
+                                    <div class="display-4 text-primary mb-2">
+                                        <i class="bi bi-house-heart-fill"></i>
+                                    </div>
+                                    <h4>No-Kill Shelter</h4>
+                                    <p class="text-muted">We never euthanize for space or time constraints.</p>
+                                </div>
+                                <div class="col-md-4 text-center mb-4 mb-md-0">
+                                    <div class="display-4 text-primary mb-2">
+                                        <i class="bi bi-heart-pulse-fill"></i>
+                                    </div>
+                                    <h4>Full Veterinary Care</h4>
+                                    <p class="text-muted">All animals receive complete medical care before adoption.</p>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="display-4 text-primary mb-2">
+                                        <i class="bi bi-people-fill"></i>
+                                    </div>
+                                    <h4>Volunteer Powered</h4>
+                                    <p class="text-muted">Our dedicated volunteers make our work possible.</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mb-3">Our Facility</h4>
+                            <p>Our shelter features:</p>
+                            <ul>
+                                <li>Spacious indoor/outdoor dog runs</li>
+                                <li>Free-roaming cat rooms with climbing structures</li>
+                                <li>Separate areas for small animals</li>
+                                <li>On-site veterinary clinic</li>
+                                <li>Training and socialization areas</li>
+                                <li>Meet-and-greet rooms for potential adopters</li>
+                            </ul>
+                            
+                            <h4 class="mb-3 mt-4">Our Team</h4>
+                            <p>Our shelter is staffed by a dedicated team of animal care professionals, veterinarians, and volunteers who are passionate about animal welfare. Our staff undergoes regular training to ensure they provide the best possible care for our animals.</p>
+                            
+                            <div class="mt-5">
+                                <h4 class="mb-3">Hours of Operation</h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>Monday - Friday</td>
+                                            <td>10:00 AM - 6:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Saturday</td>
+                                            <td>9:00 AM - 5:00 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sunday</td>
+                                            <td>11:00 AM - 4:00 PM</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Contact Information</h4>
+                                    <address class="mb-0">
+                                        <p><i class="bi bi-geo-alt-fill me-2 text-primary"></i> 123 Rescue Lane<br>Anytown, USA 12345</p>
+                                        <p><i class="bi bi-telephone-fill me-2 text-primary"></i> (555) 123-4567</p>
+                                        <p><i class="bi bi-envelope-fill me-2 text-primary"></i> info@pawsandhearts.org</p>
+                                        <p><i class="bi bi-globe me-2 text-primary"></i> <a href="http://www.pawsandhearts.org" target="_blank">www.pawsandhearts.org</a></p>
+                                    </address>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Shelter Stats</h4>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span>Animals Currently Available:</span>
+                                        <span class="fw-bold">42</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span>Animals Adopted This Year:</span>
+                                        <span class="fw-bold">328</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span>Total Adoptions Since 2005:</span>
+                                        <span class="fw-bold">10,247</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Volunteer Hours Last Month:</span>
+                                        <span class="fw-bold">1,250</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title">Support Our Work</h4>
+                                    <p>Your donations help us provide food, shelter, and medical care for animals in need.</p>
+                                    <div class="d-grid">
+                                        <a href="#" class="btn btn-primary mb-2">Donate Now</a>
+                                        <a href="#" class="btn btn-outline-primary">Become a Volunteer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adoption Process Tab -->
+                <div class="tab-pane fade" id="adoption-tab-pane" role="tabpanel" aria-labelledby="adoption-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3 class="mb-4">Our Adoption Process</h3>
+                            <p>At Paws & Hearts Animal Shelter, we're committed to finding the perfect match between our animals and their new families. Our adoption process is designed to ensure that both you and your new pet will be happy together for years to come.</p>
+                            
+                            <div class="adoption-steps mt-5">
+                                <div class="row mb-5">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">1</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Browse Available Pets</h4>
+                                        <p>Start by browsing our available pets online or visiting our shelter in person. Our staff can help you find animals that match your lifestyle and preferences.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">2</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Submit an Adoption Application</h4>
+                                        <p>Once you've found a pet you're interested in, complete our adoption application. This helps us understand your living situation, experience with pets, and expectations.</p>
+                                        <a href="adoption-application.html" class="btn btn-outline-primary mt-2">Adoption Application</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">3</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Meet Your Potential Pet</h4>
+                                        <p>Schedule a meet-and-greet with the animal you're interested in. This is a great opportunity to see if you and the pet are a good match. We encourage all household members to attend this meeting.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">4</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Home Check (if applicable)</h4>
+                                        <p>For some animals, especially those with special needs, we may conduct a brief home check to ensure your living environment is suitable for the specific pet.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">5</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Adoption Fee and Contract</h4>
+                                        <p>If approved, you'll pay the adoption fee and sign our adoption contract. The fee helps cover the cost of vaccinations, spay/neuter surgery, microchipping, and other care the animal received while at our shelter.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-2 text-center">
+                                        <div class="step-circle bg-primary text-white">6</div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Take Your New Pet Home!</h4>
+                                        <p>Congratulations! You can now take your new family member home. We'll provide you with information about your pet's medical history, dietary needs, and behavior, as well as tips for a smooth transition.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info mt-5">
+                                <h5><i class="bi bi-info-circle-fill me-2"></i> Post-Adoption Support</h5>
+                                <p class="mb-0">Our commitment to you and your pet doesn't end at adoption. We offer post-adoption support, including behavior advice, training resources, and medical guidance. Don't hesitate to contact us if you have any questions or concerns after bringing your new pet home.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Adoption Fees</h4>
+                                    <p class="text-muted">Our adoption fees help cover the cost of care each animal receives, including:</p>
+                                    <ul>
+                                        <li>Veterinary examination</li>
+                                        <li>Vaccinations</li>
+                                        <li>Spay/neuter surgery</li>
+                                        <li>Microchipping</li>
+                                        <li>Deworming and flea treatment</li>
+                                        <li>Any necessary medical treatment</li>
+                                    </ul>
+                                    <table class="table table-bordered mt-3">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Animal</th>
+                                                <th>Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Dogs (1+ years)</td>
+                                                <td>$200</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Puppies (under 1 year)</td>
+                                                <td>$250</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cats (1+ years)</td>
+                                                <td>$125</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kittens (under 1 year)</td>
+                                                <td>$150</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Small Animals</td>
+                                                <td>$50-$75</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="text-muted small">*Senior citizens (65+) and military personnel receive a 20% discount on adoption fees.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Adoption Requirements</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i> Must be at least 21 years old
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i> Valid ID with current address
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i> Proof of residence (if renting, landlord approval)
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i> All household members must agree to adoption
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i> Time to spend with your new pet
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title">Have Questions?</h4>
+                                    <p>Our adoption counselors are here to help you find the perfect pet for your family and guide you through the adoption process.</p>
+                                    <div class="d-grid">
+                                        <a href="#contact" class="btn btn-primary">Contact Us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3 class="mb-0">Reviews & Testimonials</h3>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                    <i class="bi bi-pencil-square me-2"></i> Write a Review
+                                </button>
+                            </div>
+                            
+                            <!-- Review 1 -->
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex mb-3">
+                                        <img src="images/user1.jpg" alt="Sarah J." class="rounded-circle me-3" width="60" height="60">
+                                        <div>
+                                            <h5 class="mb-1">Sarah J.</h5>
+                                            <div class="text-warning mb-2">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </div>
+                                            <p class="text-muted small">Adopted: Max (Labrador Mix) • 3 months ago</p>
+                                        </div>
+                                    </div>
+                                    <p>We had an amazing experience adopting our dog Max from Paws & Hearts. The staff was incredibly helpful and knowledgeable, taking the time to match us with a dog that fit our lifestyle perfectly. Max was already house trained and knew basic commands, which made the transition so much easier. The follow-up support has been wonderful too. Highly recommend this shelter to anyone looking to adopt!</p>
+                                    <div class="d-flex mt-3">
+                                        <img src="images/dog2.jpg" alt="Max - Labrador Mix" class="rounded me-2" width="100" height="100" style="object-fit: cover;">
+                                        <img src="images/dog2-home.jpg" alt="Max at home" class="rounded" width="100" height="100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Review 2 -->
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex mb-3">
+                                        <img src="images/user2.jpg" alt="Michael T." class="rounded-circle me-3" width="60" height="60">
+                                        <div>
+                                            <h5 class="mb-1">Michael T.</h5>
+                                            <div class="text-warning mb-2">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star"></i>
+                                            </div>
+                                            <p class="text-muted small">Adopted: Luna (Domestic Shorthair) • 6 months ago</p>
+                                        </div>
+                                    </div>
+                                    <p>The adoption process was straightforward and thorough. I appreciated how much the shelter cared about finding good homes for their animals. Luna has been a wonderful addition to our family. The only reason for 4 stars instead of 5 is that the wait time for the initial application review was longer than expected, but it was worth the wait!</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Review 3 -->
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex mb-3">
+                                        <img src="images/user3.jpg" alt="Jennifer & David K." class="rounded-circle me-3" width="60" height="60">
+                                        <div>
+                                            <h5 class="mb-1">Jennifer & David K.</h5>
+                                            <div class="text-warning mb-2">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </div>
+                                            <p class="text-muted small">Adopted: Thumper (Netherland Dwarf) • 1 month ago</p>
+                                        </div>
+                                    </div>
+                                    <p>Our children had been asking for a pet, and we decided a rabbit would be perfect for our family. The staff at Paws & Hearts was patient with all our questions and gave us excellent advice on rabbit care. They even provided a starter kit with food, bedding, and toys. Thumper has adjusted beautifully to our home, and we're so grateful to the shelter for their guidance and support throughout the process.</p>
+                                    <div class="d-flex mt-3">
+                                        <img src="images/rabbit1-home.jpg" alt="Thumper at home" class="rounded" width="100" height="100" style="object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- More reviews button -->
+                            <div class="text-center mt-4">
+                                <button class="btn btn-outline-primary">Load More Reviews</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Rating Summary</h4>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="display-4 me-3">4.5</div>
+                                        <div>
+                                            <div class="text-warning mb-1">
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                            </div>
+                                            <p class="text-muted mb-0">Based on 128 reviews</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span>5 stars</span>
+                                            <span class="text-muted small">78%</span>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 78%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span>4 stars</span>
+                                            <span class="text-muted small">15%</span>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span>3 stars</span>
+                                            <span class="text-muted small">5%</span>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span>2 stars</span>
+                                            <span class="text-muted small">1%</span>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span>1 star</span>
+                                            <span class="text-muted small">1%</span>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title">Success Stories</h4>
+                                    <p>Read heartwarming stories from families who have adopted from our shelter.</p>
+                                    <div class="list-group list-group-flush">
+                                        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center border-0 px-0">
+                                            <img src="images/success1.jpg" alt="Bella's Story" class="rounded me-3" width="60" height="60" style="object-fit: cover;">
+                                            <div>
+                                                <h6 class="mb-1">Bella's Second Chance</h6>
+                                                <p class="text-muted small mb-0">From abandoned to beloved family member</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center border-0 px-0">
+                                            <img src="images/success2.jpg" alt="Oliver's Story" class="rounded me-3" width="60" height="60" style="object-fit: cover;">
+                                            <div>
+                                                <h6 class="mb-1">Oliver's Journey Home</h6>
+                                                <p class="text-muted small mb-0">A shy cat finds his confidence</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center border-0 px-0">
+                                            <img src="images/success3.jpg" alt="Max's Story" class="rounded me-3" width="60" height="60" style="object-fit: cover;">
+                                            <div>
+                                                <h6 class="mb-1">Max & Jake: Best Friends</h6>
+                                                <p class="text-muted small mb-0">How a dog changed a boy's life</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="d-grid mt-3">
+                                        <a href="#" class="btn btn-outline-primary">View All Stories</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Contact Section -->
+    <section class="py-5 bg-light" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="text-center mb-5">Contact Paws & Hearts Animal Shelter</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Send a Message</h4>
+                                    <form id="contactForm">
+                                        <div class="mb-3">
+                                            <label for="contactName" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="contactName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactEmail" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="contactEmail" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactSubject" class="form-label">Subject</label>
+                                            <select class="form-select" id="contactSubject" required>
+                                                <option value=""  id="contactSubject" required>
+                                                <option value="" selected disabled>Select a Subject</option>
+                                                <option value="adoption">Adoption Inquiry</option>
+                                                <option value="volunteer">Volunteer Information</option>
+                                                <option value="donation">Donation Question</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contactMessage" class="form-label">Message</label>
+                                            <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Send Message</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Visit Us</h4>
+                                    <div class="d-flex mb-3">
+                                        <div class="text-primary me-3">
+                                            <i class="bi bi-geo-alt-fill fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Address</h5>
+                                            <p class="mb-0">123 Rescue Lane<br>Anytown, USA 12345</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="text-primary me-3">
+                                            <i class="bi bi-telephone-fill fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Phone</h5>
+                                            <p class="mb-0">(555) 123-4567</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="text-primary me-3">
+                                            <i class="bi bi-envelope-fill fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Email</h5>
+                                            <p class="mb-0">info@pawsandhearts.org</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="text-primary me-3">
+                                            <i class="bi bi-clock-fill fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Hours</h5>
+                                            <p class="mb-0">Monday - Friday: 10:00 AM - 6:00 PM<br>
+                                            Saturday: 9:00 AM - 5:00 PM<br>
+                                            Sunday: 11:00 AM - 4:00 PM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-3">Follow Us</h4>
+                                    <p>Stay updated on our newest animals and events by following us on social media.</p>
+                                    <div class="social-icons d-flex">
+                                        <a href="#" class="btn btn-outline-primary me-2">
+                                            <i class="bi bi-facebook"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-primary me-2">
+                                            <i class="bi bi-instagram"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-primary me-2">
+                                            <i class="bi bi-twitter"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-primary">
+                                            <i class="bi bi-youtube"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ3LjMiTiA3NMKwMDAnMTMuMyJX!5e0!3m2!1sen!2sus!4v1556736782194!5m2!1sen!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Write a Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reviewForm">
+                        <div class="mb-3">
+                            <label class="form-label">Your Rating</label>
+                            <div class="rating-stars fs-3">
+                                <i class="bi bi-star rating-star" data-value="1"></i>
+                                <i class="bi bi-star rating-star" data-value="2"></i>
+                                <i class="bi bi-star rating-star" data-value="3"></i>
+                                <i class="bi bi-star rating-star" data-value="4"></i>
+                                <i class="bi bi-star rating-star" data-value="5"></i>
+                            </div>
+                            <input type="hidden" id="ratingValue" value="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewTitle" class="form-label">Review Title</label>
+                            <input type="text" class="form-control" id="reviewTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewText" class="form-label">Your Review</label>
+                            <textarea class="form-control" id="reviewText" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="petAdopted" class="form-label">Pet Adopted (if applicable)</label>
+                            <input type="text" class="form-control" id="petAdopted" placeholder="e.g., Max (Labrador Mix)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewPhotos" class="form-label">Add Photos (optional)</label>
+                            <input type="file" class="form-control" id="reviewPhotos" multiple accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submitReview">Submit Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5>Pet Adoption and Foster System</h5>
+                    <p>Connecting pets with loving homes since 2023.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="pets.html" class="text-white">Find a Pet</a></li>
+                        <li><a href="foster.html" class="text-white">Foster</a></li>
+                        <li><a href="resources.html" class="text-white">Resources</a></li>
+                        <li><a href="about.html" class="text-white">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Pet Care Tips</a></li>
+                        <li><a href="#" class="text-white">Training Guides</a></li>
+                        <li><a href="#" class="text-white">FAQs</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to receive updates on adoptable pets and events.</p>
+                    <form class="row g-2">
+                        <div class="col-8">
+                            <input type="email" class="form-control" placeholder="Email address">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 Pet Adoption and Foster System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom CSS for step circles and pet cards -->
+    <style>
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+        
+        .pet-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        .favorite-btn {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .favorite-btn:hover, .favorite-btn.active {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .rating-stars {
+            color: #adb5bd;
+            cursor: pointer;
+        }
+        
+        .rating-stars .bi-star-fill {
+            color: #ffc107;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle between grid and list view
+            const gridView = document.getElementById('gridView');
+            const listView = document.getElementById('listView');
+            const petsGrid = document.getElementById('petsGrid');
+            const petsList = document.getElementById('petsList');
+            
+            gridView.addEventListener('click', function() {
+                petsGrid.style.display = 'flex';
+                petsList.style.display = 'none';
+                gridView.classList.add('active');
+                listView.classList.remove('active');
+            });
+            
+            listView.addEventListener('click', function() {
+                petsGrid.style.display = 'none';
+                petsList.style.display = 'block';
+                gridView.classList.remove('active');
+                listView.classList.add('active');
+            });
+            
+            // Favorite button functionality
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    if (this.classList.contains('active')) {
+                        icon.classList.remove('bi-heart');
+                        icon.classList.add('bi-heart-fill');
+                    } else {
+                        icon.classList.remove('bi-heart-fill');
+                        icon.classList.add('bi-heart');
+                    }
+                });
+            });
+            
+            // Rating stars functionality
+            const ratingStars = document.querySelectorAll('.rating-star');
+            const ratingValue = document.getElementById('ratingValue');
+            
+            ratingStars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const value = this.getAttribute('data-value');
+                    highlightStars(value);
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    highlightStars(ratingValue.value);
+                });
+                
+                star.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    ratingValue.value = value;
+                    highlightStars(value);
+                });
+            });
+            
+            function highlightStars(value) {
+                ratingStars.forEach(star => {
+                    const starValue = star.getAttribute('data-value');
+                    if (starValue <= value) {
+                        star.classList.remove('bi-star');
+                        star.classList.add('bi-star-fill');
+                    } else {
+                        star.classList.remove('bi-star-fill');
+                        star.classList.add('bi-star');
+                    }
+                });
+            }
+            
+            // Form submission handlers
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+            
+            const submitReview = document.getElementById('submitReview');
+            const reviewForm = document.getElementById('reviewForm');
+            if (submitReview && reviewForm) {
+                submitReview.addEventListener('click', function() {
+                    if (reviewForm.checkValidity() && ratingValue.value > 0) {
+                        alert('Thank you for your review!');
+                        const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+                        reviewModal.hide();
+                        reviewForm.reset();
+                        ratingValue.value = 0;
+                        highlightStars(0);
+                    } else {
+                        if (ratingValue.value == 0) {
+                            alert('Please select a rating.');
+                        }
+                        reviewForm.classList.add('was-validated');
+                    }
+                });
+            }
+            
+            // Filter form functionality
+            const resetFilters = document.getElementById('resetFilters');
+            const petFilterForm = document.getElementById('petFilterForm');
+            
+            if (resetFilters && petFilterForm) {
+                resetFilters.addEventListener('click', function() {
+                    petFilterForm.reset();
+                });
+            }
+            
+            const applyFilters = document.getElementById('applyFilters');
+            if (applyFilters) {
+                applyFilters.addEventListener('click', function() {
+                    // In a real application, this would filter the pets
+                    alert('Filters applied! This would update the pet listings in a real application.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

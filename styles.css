@@ -1,0 +1,159 @@
+/* Global Styles */
+:root {
+    --primary-color: #4e54c8;
+    --secondary-color: #8f94fb;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/image/imj.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+/* Pet Cards */
+.pet-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Icon Circles */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer a {
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
+
+footer .social-icons a {
+    font-size: 1.5rem;
+}
+
+/* Pet Details Page */
+.pet-gallery img {
+    cursor: pointer;
+    height: 100px;
+    object-fit: cover;
+}
+
+.pet-main-image {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Dashboard */
+.dashboard-sidebar {
+    background-color: var(--light-color);
+    min-height: calc(100vh - 56px);
+}
+
+.dashboard-sidebar .nav-link {
+    color: var(--dark-color);
+    border-radius: 0;
+}
+
+.dashboard-sidebar .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Application Form */
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.form-progress-step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.form-progress-step::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #dee2e6;
+    z-index: -1;
+}
+
+.form-progress-step:last-child::after {
+    display: none;
+}
+
+.form-progress-step-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+}
+
+.form-progress-step.active .form-progress-step-icon {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.form-progress-step.completed .form-progress-step-icon {
+    background-color: var(--success-color);
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px;
+    }
+    
+    .pet-card img {
+        height: 180px;
+    }
+    
+    .pet-main-image {
+        height: 300px;
+    }
+}
