@@ -122,39 +122,18 @@
                                             Please enter your phone number.
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         <label for="address" class="form-label">Address</label>
                                         <input type="text" class="form-control" id="address" required>
                                         <div class="invalid-feedback">
                                             Please enter your address.
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="city" class="form-label">City</label>
                                         <input type="text" class="form-control" id="city" required>
                                         <div class="invalid-feedback">
                                             Please enter your city.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="state" class="form-label">State</label>
-                                        <select class="form-select" id="state" required>
-                                            <option value="" selected disabled>Select State</option>
-                                            <option value="AL">Alabama</option>
-                                            <option value="AK">Alaska</option>
-                                            <option value="AZ">Arizona</option>
-                                            <!-- Add all states here -->
-                                            <option value="WY">Wyoming</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select your state.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="zipCode" class="form-label">Zip Code</label>
-                                        <input type="text" class="form-control" id="zipCode" required>
-                                        <div class="invalid-feedback">
-                                            Please enter your zip code.
                                         </div>
                                     </div>
                                 </div>
@@ -194,191 +173,6 @@
                                         </div>
                                         <div class="invalid-feedback">
                                             Passwords do not match.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Additional Information (conditional based on account type) -->
-                                <div id="adopterInfo" class="additional-info mb-4">
-                                    <h5 class="mb-3">Adopter Information</h5>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="housingType" class="form-label">Housing Type</label>
-                                            <select class="form-select" id="housingType">
-                                                <option value="" selected disabled>Select Housing Type</option>
-                                                <option value="house">House</option>
-                                                <option value="apartment">Apartment</option>
-                                                <option value="condo">Condo</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="ownRent" class="form-label">Do you own or rent?</label>
-                                            <select class="form-select" id="ownRent">
-                                                <option value="" selected disabled>Select Option</option>
-                                                <option value="own">Own</option>
-                                                <option value="rent">Rent</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Do you have any pets currently?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsYes" value="yes">
-                                                <label class="form-check-label" for="hasPetsYes">
-                                                    Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsNo" value="no">
-                                                <label class="form-check-label" for="hasPetsNo">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12" id="currentPetsInfo" style="display: none;">
-                                            <label for="currentPets" class="form-label">Please describe your current pets:</label>
-                                            <textarea class="form-control" id="currentPets" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="fosterInfo" class="additional-info mb-4" style="display: none;">
-                                    <h5 class="mb-3">Foster Information</h5>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="fosterExperience" class="form-label">Foster Experience</label>
-                                            <select class="form-select" id="fosterExperience">
-                                                <option value="" selected disabled>Select Experience Level</option>
-                                                <option value="none">None</option>
-                                                <option value="beginner">Beginner (0-1 year)</option>
-                                                <option value="intermediate">Intermediate (1-3 years)</option>
-                                                <option value="experienced">Experienced (3+ years)</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="fosterAvailability" class="form-label">Availability</label>
-                                            <select class="form-select" id="fosterAvailability">
-                                                <option value="" selected disabled>Select Availability</option>
-                                                <option value="short-term">Short-term (1-4 weeks)</option>
-                                                <option value="medium-term">Medium-term (1-3 months)</option>
-                                                <option value="long-term">Long-term (3+ months)</option>
-                                                <option value="emergency">Emergency only</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">What types of animals are you willing to foster?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterDogs">
-                                                <label class="form-check-label" for="fosterDogs">
-                                                    Dogs
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterCats">
-                                                <label class="form-check-label" for="fosterCats">
-                                                    Cats
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterSmallAnimals">
-                                                <label class="form-check-label" for="fosterSmallAnimals">
-                                                    Small Animals (rabbits, guinea pigs, etc.)
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterSpecialNeeds">
-                                                <label class="form-check-label" for="fosterSpecialNeeds">
-                                                    Special Needs Animals
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="volunteerInfo" class="additional-info mb-4" style="display: none;">
-                                    <h5 class="mb-3">Volunteer Information</h5>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="volunteerAvailability" class="form-label">Availability</label>
-                                            <select class="form-select" id="volunteerAvailability">
-                                                <option value="" selected disabled>Select Availability</option>
-                                                <option value="weekdays">Weekdays</option>
-                                                <option value="weekends">Weekends</option>
-                                                <option value="both">Both</option>
-                                                <option value="flexible">Flexible</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="volunteerHours" class="form-label">Hours per week</label>
-                                            <select class="form-select" id="volunteerHours">
-                                                <option value="" selected disabled>Select Hours</option>
-                                                <option value="1-5">1-5 hours</option>
-                                                <option value="5-10">5-10 hours</option>
-                                                <option value="10+">10+ hours</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">What volunteer activities are you interested in?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="volunteerAnimalCare">
-                                                <label class="form-check-label" for="volunteerAnimalCare">
-                                                    Animal Care
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="volunteerEvents">
-                                                <label class="form-check-label" for="volunteerEvents">
-                                                    Events & Fundraising
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="volunteerAdmin">
-                                                <label class="form-check-label" for="volunteerAdmin">
-                                                    Administrative Support
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="volunteerTransport">
-                                                <label class="form-check-label" for="volunteerTransport">
-                                                    Animal Transport
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="volunteerSkills" class="form-label">Do you have any special skills or experience that would be helpful?</label>
-                                            <textarea class="form-control" id="volunteerSkills" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="shelterInfo" class="additional-info mb-4" style="display: none;">
-                                    <h5 class="mb-3">Shelter/Rescue Information</h5>
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="organizationName" class="form-label">Organization Name</label>
-                                            <input type="text" class="form-control" id="organizationName">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="organizationType" class="form-label">Organization Type</label>
-                                            <select class="form-select" id="organizationType">
-                                                <option value="" selected disabled>Select Type</option>
-                                                <option value="shelter">Animal Shelter</option>
-                                                <option value="rescue">Rescue Group</option>
-                                                <option value="sanctuary">Animal Sanctuary</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="taxId" class="form-label">Tax ID/EIN (if applicable)</label>
-                                            <input type="text" class="form-control" id="taxId">
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="organizationWebsite" class="form-label">Website (if applicable)</label>
-                                            <input type="url" class="form-control" id="organizationWebsite">
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="organizationDescription" class="form-label">Organization Description</label>
-                                            <textarea class="form-control" id="organizationDescription" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
