@@ -43,6 +43,13 @@
             </div>
         </div>
     </nav>
+    <?php
+        session_start();
+        if (isset($_SESSION['success_message'])) {
+            echo '<div class="alert alert-success text-center">' . $_SESSION['success_message'] . '</div>';
+            unset($_SESSION['success_message']);
+        }
+    ?>
 
     <!-- Hero Section -->
     <header class="hero-section text-white text-center">

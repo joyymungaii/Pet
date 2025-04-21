@@ -1,3 +1,46 @@
+<?php
+session_start();
+
+$error = "";
+
+if (isset($_POST['login_btn'])) {
+    $host = 'localhost';
+    $db = 'pet_adoption';
+    $user = 'root';
+    $pass = '';
+
+    $conn = new mysqli($host, $user, $pass, $db);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $input = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    $query = "SELECT * FROM users WHERE username = ? OR email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $input, $input);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['success_message'] = "Welcome back, " . htmlspecialchars($user['username']) . "!";
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Invalid username or password.";
+        }
+    } else {
+        $error = "No user found with provided credentials.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +86,14 @@
             </div>
         </div>
     </nav>
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <?= htmlspecialchars($error) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
 
     <!-- Login Section -->
     <section class="py-5 bg-light">
@@ -63,12 +114,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
 
-                            <form id="loginForm">
+                            <form action="login.php" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username or Email</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter your username or email" required>
+                                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username or email" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -78,7 +129,7 @@
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
                                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                             <i class="bi bi-eye"></i>
                                         </button>
@@ -89,7 +140,7 @@
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                                 <div class="d-grid mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                                    <button type="submit" name="login_btn" class="btn btn-primary btn-lg">Sign In</button>
                                 </div>
                             </form>
 
