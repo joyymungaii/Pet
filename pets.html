@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,16 +108,7 @@
                                 <label for="location" class="form-label">Location</label>
                                 <input type="text" class="form-control" id="location" placeholder="City or ZIP">
                             </div>
-                            <div class="col-md-3">
-                                <label for="distance" class="form-label">Distance</label>
-                                <select id="distance" class="form-select">
-                                    <option value="10">10 miles</option>
-                                    <option value="25">25 miles</option>
-                                    <option value="50" selected>50 miles</option>
-                                    <option value="100">100 miles</option>
-                                    <option value="any">Any distance</option>
-                                </select>
-                            </div>
+                            
                             <div class="col-md-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select id="status" class="form-select">
@@ -126,41 +118,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <button type="button" class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#advancedFilters">
-                                    Advanced Filters <i class="bi bi-chevron-down"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="collapse" id="advancedFilters">
-                            <div class="row g-3 mt-1">
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="goodWithKids">
-                                        <label class="form-check-label" for="goodWithKids">Good with Kids</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="goodWithDogs">
-                                        <label class="form-check-label" for="goodWithDogs">Good with Dogs</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="goodWithCats">
-                                        <label class="form-check-label" for="goodWithCats">Good with Cats</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="specialNeeds">
-                                        <label class="form-check-label" for="specialNeeds">Special Needs</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary px-4">Search</button>
@@ -207,91 +166,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/cat.jpeg" class="card-img-top" alt="Luna">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Luna</h5>
-                            <p class="card-text text-muted">Domestic Shorthair • 1 year • Female</p>
-                            <p class="card-text">Sweet and affectionate cat who enjoys cuddling and playing with toys.</p>
-                            <p class="mb-0"><small class="text-muted">Feline Friends Shelter • 5.7 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=2" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/rabbit1.jpeg" class="card-img-top" alt="Max">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Max</h5>
-                            <p class="card-text text-muted">Labrador Mix • 3 years • Male</p>
-                            <p class="card-text">Gentle and well-behaved dog who needs a temporary foster home.</p>
-                            <p class="mb-0"><small class="text-muted">Second Chance Rescue • 8.1 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=3" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/rabbit.jpeg" class="card-img-top" alt="Thumper">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Thumper</h5>
-                            <p class="card-text text-muted">Holland Lop • 6 months • Male</p>
-                            <p class="card-text">Curious and friendly rabbit who enjoys exploring and being petted.</p>
-                            <p class="mb-0"><small class="text-muted">Small Paws Rescue • 12.3 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=4" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/cat.jpeg" class="card-img-top" alt="Oliver">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Oliver</h5>
-                            <p class="card-text text-muted">Maine Coon • 4 years • Male</p>
-                            <p class="card-text">Majestic and friendly cat who loves attention and playing with toys.</p>
-                            <p class="mb-0"><small class="text-muted">Whisker Haven • 7.5 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=5" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/dog.jpeg" class="card-img-top" alt="Bella">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Bella</h5>
-                            <p class="card-text text-muted">Beagle • 1 year • Female</p>
-                            <p class="card-text">Playful and curious pup who loves to explore and make new friends.</p>
-                            <p class="mb-0"><small class="text-muted">Paws & Hearts • 4.8 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=6" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             
             <!-- Pagination -->

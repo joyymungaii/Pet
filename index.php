@@ -24,7 +24,7 @@
                         <a class="nav-link active" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pets.html">Find a Pet</a>
+                        <a class="nav-link" href="pets.php">Find a Pet</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="foster.html">Foster</a>
