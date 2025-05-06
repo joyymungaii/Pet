@@ -1,3 +1,14 @@
+<?php
+// adoption-application.php
+$pet_id = filter_input(INPUT_GET, 'pet_id', FILTER_SANITIZE_NUMBER_INT);
+if (!$pet_id) {
+    // Handle the case where pet_id is missing or invalid
+    echo "Error: Invalid pet ID.";
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,39 +106,40 @@
             <!-- Application Form -->
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-                    <form id="adoption-application-form">
-                        <!-- Step 1: Personal Information -->
+                <form id="adoption-application-form" action="submit_application.php" method="POST">                        <!-- Step 1: Personal Information -->
                         <div id="step-1" class="form-step active">
                             <h3 class="card-title mb-4">Personal Information</h3>
                             
                             <div class="row g-3">
+                            <input type="hidden" name="pet_id" value="<?php echo htmlspecialchars($pet_id); ?>">
+
                                 <div class="col-md-6">
                                     <label for="first-name" class="form-label">First Name *</label>
-                                    <input type="text" class="form-control" id="first-name" required>
+                                    <input type="text" class="form-control" name="first-name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="last-name" class="form-label">Last Name *</label>
-                                    <input type="text" class="form-control" id="last-name" required>
+                                    <input type="text" class="form-control" name="last-name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email Address *</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" name="email" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone" class="form-label">Phone Number *</label>
-                                    <input type="tel" class="form-control" id="phone" required>
+                                    <input type="tel" class="form-control" name="phone" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="form-label">Street Address *</label>
-                                    <input type="text" class="form-control" id="address" required>
+                                    <input type="text" class="form-control" name="address" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="city" class="form-label">City *</label>
-                                    <input type="text" class="form-control" id="city" required>
+                                    <input type="text" class="form-control" name="city" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="state" class="form-label">State *</label>
-                                    <select class="form-select" id="state" required>
+                                    <select class="form-select" name="state" required>
                                         <option value="" selected disabled>Select State</option>
                                         <option value="AL">Alabama</option>
                                         <option value="AK">Alaska</option>
@@ -137,11 +149,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="zip" class="form-label">ZIP Code *</label>
-                                    <input type="text" class="form-control" id="zip" required>
+                                    <input type="text" class="form-control" name="zip" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age" class="form-label">Age *</label>
-                                    <select class="form-select" id="age" required>
+                                    <select class="form-select" name="age" required>
                                         <option value="" selected disabled>Select Age Range</option>
                                         <option value="18-25">18-25</option>
                                         <option value="26-35">26-35</option>
@@ -153,7 +165,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="occupation" class="form-label">Occupation *</label>
-                                    <input type="text" class="form-control" id="occupation" required>
+                                    <input type="text" class="form-control" name="occupation" required>
                                 </div>
                             </div>
                             
@@ -169,7 +181,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="housing-type" class="form-label">Housing Type *</label>
-                                    <select class="form-select" id="housing-type" required>
+                                    <select class="form-select" name="housing-type" required>
                                         <option value="" selected disabled>Select Housing Type</option>
                                         <option value="house">House</option>
                                         <option value="apartment">Apartment</option>
@@ -181,7 +193,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ownership" class="form-label">Do you own or rent? *</label>
-                                    <select class="form-select" id="ownership" required>
+                                    <select class="form-select" name="ownership" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="own">Own</option>
                                         <option value="rent">Rent</option>
@@ -195,15 +207,15 @@
                                             <div class="row g-3">
                                                 <div class="col-md-6">
                                                     <label for="landlord-name" class="form-label">Landlord Name *</label>
-                                                    <input type="text" class="form-control" id="landlord-name">
+                                                    <input type="text" class="form-control" name="landlord-name">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="landlord-phone" class="form-label">Landlord Phone *</label>
-                                                    <input type="tel" class="form-control" id="landlord-phone">
+                                                    <input type="tel" class="form-control" name="landlord-phone">
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="pet-permission">
+                                                        <input class="form-check-input" type="checkbox" name="pet-permission">
                                                         <label class="form-check-label" for="pet-permission">
                                                             I have permission to have pets in my rental
                                                         </label>
@@ -216,7 +228,7 @@
                                 
                                 <div class="col-md-6">
                                     <label for="yard" class="form-label">Do you have a yard? *</label>
-                                    <select class="form-select" id="yard" required>
+                                    <select class="form-select" name="yard" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="yes-fenced">Yes, fenced</option>
                                         <option value="yes-unfenced">Yes, unfenced</option>
@@ -225,7 +237,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fence-height" class="form-label">If fenced, how tall is the fence?</label>
-                                    <select class="form-select" id="fence-height">
+                                    <select class="form-select" name="fence-height">
                                         <option value="" selected disabled>Select Height</option>
                                         <option value="less-than-4">Less than 4 feet</option>
                                         <option value="4-6">4-6 feet</option>
@@ -238,22 +250,22 @@
                                     <div class="row g-3">
                                         <div class="col-md-4">
                                             <label for="adults" class="form-label">Adults (18+)</label>
-                                            <input type="number" class="form-control" id="adults" min="1" value="1" required>
+                                            <input type="number" class="form-control" name="adults" min="1" value="1" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="children" class="form-label">Children (under 18)</label>
-                                            <input type="number" class="form-control" id="children" min="0" value="0">
+                                            <input type="number" class="form-control" name="children" min="0" value="0">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="seniors" class="form-label">Seniors (65+)</label>
-                                            <input type="number" class="form-control" id="seniors" min="0" value="0">
+                                            <input type="number" class="form-control" name="seniors" min="0" value="0">
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12" id="children-ages" style="display: none;">
                                     <label for="children-ages-input" class="form-label">Ages of children in the home:</label>
-                                    <input type="text" class="form-control" id="children-ages-input" placeholder="e.g., 5, 8, 12">
+                                    <input type="text" class="form-control" name="children-ages-input" placeholder="e.g., 5, 8, 12">
                                 </div>
                                 
                                 <div class="col-12">
@@ -270,7 +282,7 @@
                                 
                                 <div class="col-12" id="allergies-details" style="display: none;">
                                     <label for="allergies-description" class="form-label">Please describe the allergies:</label>
-                                    <textarea class="form-control" id="allergies-description" rows="2"></textarea>
+                                    <textarea class="form-control" name="allergies-description" rows="2"></textarea>
                                 </div>
                             </div>
                             
@@ -305,7 +317,7 @@
                                                 <div class="row g-3 mb-3 current-pet-row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Type</label>
-                                                        <select class="form-select">
+                                                        <select class="form-select" name>
                                                             <option value="" selected disabled>Select Type</option>
                                                             <option value="dog">Dog</option>
                                                             <option value="cat">Cat</option>
@@ -317,15 +329,15 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label class="form-label">Breed</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" name="breed" class="form-control">
                                                     </div>
                                                     <div class="col-md-2">
                                                         <label class="form-label">Age</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" name="breed" class="form-control">
                                                     </div>
                                                     <div class="col-md-2">
                                                         <label class="form-label">Gender</label>
-                                                        <select class="form-select">
+                                                        <select class="form-select" name="">
                                                             <option value="" selected disabled>Select</option>
                                                             <option value="male">Male</option>
                                                             <option value="female">Female</option>
@@ -362,7 +374,7 @@
                                 
                                 <div class="col-12" id="past-pets-details" style="display: none;">
                                     <label for="past-pets-description" class="form-label">Please describe your past pets and what happened to them:</label>
-                                    <textarea class="form-control" id="past-pets-description" rows="3"></textarea>
+                                    <textarea class="form-control" name="past-pets-description" rows="3"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
@@ -370,18 +382,18 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="vet-name" class="form-label">Veterinarian/Clinic Name</label>
-                                            <input type="text" class="form-control" id="vet-name">
+                                            <input type="text" class="form-control" name="vet-name">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="vet-phone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="vet-phone">
+                                            <input type="tel" class="form-control" name="vet-phone">
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-care" class="form-label">How many hours per day will the pet be left alone? *</label>
-                                    <select class="form-select" id="pet-care" required>
+                                    <select class="form-select" name="pet-care" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="0-2">0-2 hours</option>
                                         <option value="3-5">3-5 hours</option>
@@ -392,17 +404,17 @@
                                 
                                 <div class="col-12">
                                     <label for="pet-sleep" class="form-label">Where will the pet sleep at night? *</label>
-                                    <input type="text" class="form-control" id="pet-sleep" required>
+                                    <input type="text" class="form-control" name="pet-sleep" required>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-exercise" class="form-label">How will you exercise the pet? *</label>
-                                    <textarea class="form-control" id="pet-exercise" rows="2" required></textarea>
+                                    <textarea class="form-control" name="pet-exercise" rows="2" required></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-training" class="form-label">What training plans do you have for the pet?</label>
-                                    <textarea class="form-control" id="pet-training" rows="2"></textarea>
+                                    <textarea class="form-control" name="pet-training" rows="2"></textarea>
                                 </div>
                             </div>
                             
@@ -419,17 +431,17 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="additional-info" class="form-label">Is there anything else you'd like us to know about you or your home?</label>
-                                    <textarea class="form-control" id="additional-info" rows="3"></textarea>
+                                    <textarea class="form-control" name="additional-info" rows="3"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="questions" class="form-label">Do you have any questions for us?</label>
-                                    <textarea class="form-control" id="questions" rows="2"></textarea>
+                                    <textarea class="form-control" name="questions" rows="2"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="terms-agree" required>
+                                        <input class="form-check-input" type="checkbox" name="terms-agree" required>
                                         <label class="form-check-label" for="terms-agree">
                                             I understand that submission of this application does not guarantee adoption and that the rescue organization reserves the right to deny any application. *
                                         </label>
@@ -438,7 +450,7 @@
                                 
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="home-visit" required>
+                                        <input class="form-check-input" type="checkbox" name="home-visit" required>
                                         <label class="form-check-label" for="home-visit">
                                             I agree to a home visit as part of the adoption process. *
                                         </label>
@@ -447,7 +459,7 @@
                                 
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="accurate-info" required>
+                                        <input class="form-check-input" type="checkbox" name="accurate-info" required>
                                         <label class="form-check-label" for="accurate-info">
                                             I certify that all information provided in this application is true and accurate. *
                                         </label>
@@ -625,7 +637,7 @@
             alert('Thank you for submitting your adoption application! We will review it and contact you soon.');
             
             // Redirect to confirmation page
-            window.location.href = 'application-confirmation.html';
+            window.location.href = 'pets.php';
         });
     </script>
     <script src="main.js"></script>
