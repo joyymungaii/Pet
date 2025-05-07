@@ -1,3 +1,139 @@
+<?php
+// ✅ Enable error reporting for debugging (remove in production)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pet_adoption";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the request method is POST AND the btnsubmit button was pressed
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsubmit'])) {
+    // Function to sanitize input data
+    function sanitize_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    // Retrieve and sanitize form data
+    $firstName = sanitize_input($_POST["firstName"]);
+    $lastName = sanitize_input($_POST["lastName"]);
+    $email = sanitize_input($_POST["email"]);
+    $phone = sanitize_input($_POST["phone"]);
+    $streetAddress = sanitize_input($_POST["address"]);
+    $city = sanitize_input($_POST["city"]);
+    $state = sanitize_input($_POST["state"]);
+    $zipCode = sanitize_input($_POST["zipCode"]);
+    $occupation = sanitize_input($_POST["occupation"]);
+    $employer = sanitize_input($_POST["employer"]);
+    $emergencyContact = sanitize_input($_POST["emergencyContact"]);
+    $housingType = sanitize_input($_POST["housingType"]);
+    $housingStatus = sanitize_input($_POST["housingStatus"]);
+    $landlordName = isset($_POST["landlordName"]) ? sanitize_input($_POST["landlordName"]) : NULL;
+    $landlordPhone = isset($_POST["landlordPhone"]) ? sanitize_input($_POST["landlordPhone"]) : NULL;
+    $yardDescription = sanitize_input($_POST["yardDescription"]);
+    $fenceDetails = isset($_POST["fenceDetails"]) ? sanitize_input($_POST["fenceDetails"]) : NULL;
+    $hasPool = isset($_POST["hasPool"]) ? 1 : 0;
+    $poolDetails = isset($_POST["poolDetails"]) ? sanitize_input($_POST["poolDetails"]) : NULL;
+    $adultsCount = sanitize_input($_POST["adultsCount"]);
+    $childrenCount = sanitize_input($_POST["childrenCount"]);
+    $childrenAges = isset($_POST["childrenAges"]) ? sanitize_input($_POST["childrenAges"]) : NULL;
+    $hasAllergies = isset($_POST["hasAllergies"]) ? 1 : 0;
+    $allergiesDetails = isset($_POST["allergiesDetails"]) ? sanitize_input($_POST["allergiesDetails"]) : NULL;
+    $hasPets = isset($_POST["hasPets"]) ? 1 : 0;
+    $currentPets = isset($_POST["currentPets"]) ? sanitize_input($_POST["currentPets"]) : NULL;
+    $hadPets = isset($_POST["hadPets"]) ? 1 : 0;
+    $previousPets = isset($_POST["previousPets"]) ? sanitize_input($_POST["previousPets"]) : NULL;
+    $fosterDogs = isset($_POST["fosterDogs"]) ? 1 : 0;
+    $fosterPuppies = isset($_POST["fosterPuppies"]) ? 1 : 0;
+    $fosterCats = isset($_POST["fosterCats"]) ? 1 : 0;
+    $fosterKittens = isset($_POST["fosterKittens"]) ? 1 : 0;
+    $fosterSmallAnimals = isset($_POST["fosterSmallAnimals"]) ? 1 : 0;
+    $willingSpecialNeeds = isset($_POST["specialNeeds"]) ? sanitize_input($_POST["specialNeeds"]) : NULL;
+    $willingMedication = isset($_POST["needsMedication"]) ? ($_POST["needsMedication"] === "yes" ? 1 : 0) : NULL;
+    $willingTraining = isset($_POST["needsTraining"]) ? ($_POST["needsTraining"] === "yes" ? 1 : 0) : NULL;
+    $fosterDuration = sanitize_input($_POST["fosterDuration"]);
+    $hoursAlone = sanitize_input($_POST["hoursAlone"]);
+    $fosterExperience = sanitize_input($_POST["fosterExperience"]);
+    $reference1Name = sanitize_input($_POST["reference1Name"]);
+    $reference1Phone = sanitize_input($_POST["reference1Phone"]);
+    $reference1Relationship = sanitize_input($_POST["reference1Relationship"]);
+    $reference2Name = sanitize_input($_POST["reference2Name"]);
+    $reference2Phone = sanitize_input($_POST["reference2Phone"]);
+    $reference2Relationship = sanitize_input($_POST["reference2Relationship"]);
+    $vetName = isset($_POST["vetName"]) ? sanitize_input($_POST["vetName"]) : NULL;
+    $vetPhone = isset($_POST["vetPhone"]) ? sanitize_input($_POST["vetPhone"]) : NULL;
+    $agreedTerms = isset($_POST["agreeTerms"]) ? 1 : 0;
+    $agreedHomeVisit = isset($_POST["agreeHomeVisit"]) ? 1 : 0;
+    $agreedUpdates = isset($_POST["agreeUpdates"]) ? 1 : 0;
+    $additionalComments = isset($_POST["additionalComments"]) ? sanitize_input($_POST["additionalComments"]) : NULL;
+
+    // SQL insert with 51 placeholders
+    $sql = "INSERT INTO application_data (
+        firstName, lastName, email, phone, streetAddress, 
+        city, state, zipCode, occupation, employer, 
+        emergencyContact,housingType, housingStatus, landlordName, landlordPhone, 
+        yardDescription,fenceDetails, hasPool, poolDetails,adultsCount, 
+        childrenCount, childrenAges, hasAllergies, allergiesDetails, hasPets, 
+        currentPets,hadPets, previousPets,fosterDogs, fosterPuppies, 
+        fosterCats, fosterKittens, fosterSmallAnimals, willingSpecialNeeds, willingMedication,
+        willingTraining, fosterDuration, hoursAlone, fosterExperience, reference1Name,
+        reference1Phone,reference1Relationship, reference2Name, reference2Phone, reference2Relationship,
+        vetName, vetPhone,agreedTerms, agreedHomeVisit, agreedUpdates,
+        additionalComments
+    ) VALUES (
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?,
+        ?
+    )";
+//sssssssssssssssssisiisisisisiiiisiisssssssssssiiis
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("sssssssssssssssssisiiisiiisssssiiissssssssssssiiiis",
+    $firstName, $lastName, $email, $phone, $streetAddress, $city, $state, $zipCode, $occupation, $employer, $emergencyContact,
+    $housingType, $housingStatus, $landlordName, $landlordPhone, $yardDescription, $fenceDetails, $hasPool, $poolDetails,
+    $adultsCount, $childrenCount, $childrenAges, $hasAllergies, $allergiesDetails, $hasPets, $currentPets, $hadPets, $previousPets,
+    $fosterDogs, $fosterPuppies, $fosterCats, $fosterKittens, $fosterSmallAnimals, $willingSpecialNeeds, $willingMedication,
+    $willingTraining, $fosterDuration, $hoursAlone, $fosterExperience, $reference1Name, $reference1Phone,
+    $reference1Relationship, $reference2Name, $reference2Phone, $reference2Relationship, $vetName, $vetPhone,
+    $agreedTerms, $agreedHomeVisit, $agreedUpdates, $additionalComments
+);
+        if ($stmt->execute()) {
+            echo "<div class='alert alert-success' role='alert'>Foster application data submitted successfully!</div>";
+        } else {
+            echo "<div class='alert alert-danger' role='alert'>Error submitting data: " . $stmt->error . "</div>";
+        }
+        $stmt->close();
+    } else {
+        echo "<div class='alert alert-danger' role='alert'>SQL prepare failed: " . $conn->error . "</div>";
+    }
+} // Closing brace for the main IF block
+
+// Close the database connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +204,7 @@
                                 <p class="text-center text-muted">Please complete all sections of this application. The more information you provide, the better we can match you with animals that fit your household and lifestyle.</p>
                             </div>
 
-                            <form id="fosterApplicationForm" class="needs-validation" novalidate>
+                            <form id="fosterApplicationForm" method="POST" action="foster-application.php" >
                                 <!-- Progress Bar -->
                                 <div class="progress mb-4" style="height: 10px;">
                                     <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="formProgress"></div>
@@ -87,60 +223,58 @@
                                     <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
                                 </div>
 
-                                <!-- Step 1: Personal Information -->
                                 <div class="form-step" id="step1">
                                     <h4 class="mb-4">Personal Information</h4>
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="firstName" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" required>
+                                            <input type="text" class="form-control" id="firstName" name="firstName" required>
                                             <div class="invalid-feedback">
                                                 Please enter your first name.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="lastName" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" required>
+                                            <input type="text" class="form-control" id="lastName" name="lastName" required>
                                             <div class="invalid-feedback">
                                                 Please enter your last name.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="email" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" id="email" required>
+                                            <input type="email" class="form-control" id="email" name="email" required>
                                             <div class="invalid-feedback">
                                                 Please enter a valid email address.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="phone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="phone" required>
+                                            <input type="tel" class="form-control" id="phone" name="phone" required>
                                             <div class="invalid-feedback">
                                                 Please enter your phone number.
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="address" class="form-label">Street Address</label>
-                                            <input type="text" class="form-control" id="address" required>
+                                            <input type="text" class="form-control" id="address" name="address" required>
                                             <div class="invalid-feedback">
                                                 Please enter your street address.
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="city" class="form-label">City</label>
-                                            <input type="text" class="form-control" id="city" required>
+                                            <input type="text" class="form-control" id="city" name="city" required>
                                             <div class="invalid-feedback">
                                                 Please enter your city.
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="state" class="form-label">State</label>
-                                            <select class="form-select" id="state" required>
+                                            <select class="form-select" id="state" name="state" required>
                                                 <option value="" selected disabled>Select State</option>
                                                 <option value="AL">Alabama</option>
                                                 <option value="AK">Alaska</option>
                                                 <option value="AZ">Arizona</option>
-                                                <!-- Add all states here -->
                                                 <option value="WY">Wyoming</option>
                                             </select>
                                             <div class="invalid-feedback">
@@ -149,42 +283,41 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="zipCode" class="form-label">Zip Code</label>
-                                            <input type="text" class="form-control" id="zipCode" required>
+                                            <input type="text" class="form-control" id="zipCode" name="zipCode" required>
                                             <div class="invalid-feedback">
                                                 Please enter your zip code.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="occupation" class="form-label">Occupation</label>
-                                            <input type="text" class="form-control" id="occupation" required>
+                                            <input type="text" class="form-control" id="occupation" name="occupation" required>
                                             <div class="invalid-feedback">
                                                 Please enter your occupation.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="employer" class="form-label">Employer</label>
-                                            <input type="text" class="form-control" id="employer" required>
+                                            <input type="text" class="form-control" id="employer" name="employer" required>
                                             <div class="invalid-feedback">
                                                 Please enter your employer.
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="emergencyContact" class="form-label">Emergency Contact (Name & Phone)</label>
-                                            <input type="text" class="form-control" id="emergencyContact" required>
+                                            <input type="text" class="form-control" id="emergencyContact" name="emergencyContact" required>
                                             <div class="invalid-feedback">
                                                 Please provide an emergency contact.
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Step 2: Housing Information -->
+                        
                                 <div class="form-step" id="step2" style="display: none;">
                                     <h4 class="mb-4">Housing Information</h4>
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="housingType" class="form-label">Housing Type</label>
-                                            <select class="form-select" id="housingType" required>
+                                            <select class="form-select" id="housingType" name="housingType" required>
                                                 <option value="" selected disabled>Select Housing Type</option>
                                                 <option value="house">House</option>
                                                 <option value="apartment">Apartment</option>
@@ -199,7 +332,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="housingStatus" class="form-label">Do you own or rent?</label>
-                                            <select class="form-select" id="housingStatus" required>
+                                            <select class="form-select" id="housingStatus" name="housingStatus" required>
                                                 <option value="" selected disabled>Select Option</option>
                                                 <option value="own">Own</option>
                                                 <option value="rent">Rent</option>
@@ -216,17 +349,17 @@
                                             <div class="row g-3">
                                                 <div class="col-md-6">
                                                     <label for="landlordName" class="form-label">Landlord/Property Manager Name</label>
-                                                    <input type="text" class="form-control" id="landlordName">
+                                                    <input type="text" class="form-control" id="landlordName" name="landlordName">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="landlordPhone" class="form-label">Landlord/Property Manager Phone</label>
-                                                    <input type="tel" class="form-control" id="landlordPhone">
+                                                    <input type="tel" class="form-control" id="landlordPhone" name="landlordPhone">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="yardDescription" class="form-label">Yard Description</label>
-                                            <select class="form-select" id="yardDescription" required>
+                                            <select class="form-select" id="yardDescription" name="yardDescription" required>
                                                 <option value="" selected disabled>Select Option</option>
                                                 <option value="no-yard">No yard</option>
                                                 <option value="unfenced">Yard, but not fenced</option>
@@ -239,7 +372,7 @@
                                         </div>
                                         <div class="col-12" id="fenceDetailsSection" style="display: none;">
                                             <label for="fenceDetails" class="form-label">Fence Details (height, material, etc.)</label>
-                                            <textarea class="form-control" id="fenceDetails" rows="2"></textarea>
+                                            <textarea class="form-control" id="fenceDetails" name="fenceDetails" rows="2"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Do you have a pool?</label>
@@ -250,7 +383,7 @@
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hasPool" id="hasPoolNo" value="no">
+                                                <input class="form-check-input" type="radio" name="hasPool" id="hasPoolNo" value="no" checked>
                                                 <label class="form-check-label" for="hasPoolNo">
                                                     No
                                                 </label>
@@ -258,32 +391,31 @@
                                         </div>
                                         <div class="col-12" id="poolDetailsSection" style="display: none;">
                                             <label for="poolDetails" class="form-label">Pool Details (fenced, covered, etc.)</label>
-                                            <textarea class="form-control" id="poolDetails" rows="2"></textarea>
+                                            <textarea class="form-control" id="poolDetails" name="poolDetails" rows="2"></textarea>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Step 3: Household Information -->
+                        
                                 <div class="form-step" id="step3" style="display: none;">
                                     <h4 class="mb-4">Household Information</h4>
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="adultsCount" class="form-label">Number of Adults in Household</label>
-                                            <input type="number" class="form-control" id="adultsCount" min="1" required>
+                                            <input type="number" class="form-control" id="adultsCount" name="adultsCount" min="1" required>
                                             <div class="invalid-feedback">
                                                 Please enter the number of adults.
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="childrenCount" class="form-label">Number of Children in Household</label>
-                                            <input type="number" class="form-control" id="childrenCount" min="0" required>
+                                            <input type="number" class="form-control" id="childrenCount" name="childrenCount" min="0" required>
                                             <div class="invalid-feedback">
                                                 Please enter the number of children.
                                             </div>
                                         </div>
                                         <div class="col-12" id="childrenAgesSection" style="display: none;">
                                             <label for="childrenAges" class="form-label">Ages of Children</label>
-                                            <input type="text" class="form-control" id="childrenAges" placeholder="e.g., 5, 8, 12">
+                                            <input type="text" class="form-control" id="childrenAges" name="childrenAges" placeholder="e.g., 5, 8, 12">
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Does anyone in your household have allergies to animals?</label>
@@ -294,7 +426,7 @@
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hasAllergies" id="hasAllergiesNo" value="no">
+                                                <input class="form-check-input" type="radio" name="hasAllergies" id="hasAllergiesNo" value="no" checked>
                                                 <label class="form-check-label" for="hasAllergiesNo">
                                                     No
                                                 </label>
@@ -302,7 +434,7 @@
                                         </div>
                                         <div class="col-12" id="allergiesDetailsSection" style="display: none;">
                                             <label for="allergiesDetails" class="form-label">Please describe the allergies</label>
-                                            <textarea class="form-control" id="allergiesDetails" rows="2"></textarea>
+                                            <textarea class="form-control" id="allergiesDetails" name="allergiesDetails" rows="2"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Do you currently have any pets?</label>
@@ -313,7 +445,7 @@
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsNo" value="no">
+                                                <input class="form-check-input" type="radio" name="hasPets" id="hasPetsNo" value="no" checked>
                                                 <label class="form-check-label" for="hasPetsNo">
                                                     No
                                                 </label>
@@ -321,7 +453,7 @@
                                         </div>
                                         <div class="col-12" id="currentPetsSection" style="display: none;">
                                             <label for="currentPets" class="form-label">Please list all current pets (species, breed, age, gender, spayed/neutered)</label>
-                                            <textarea class="form-control" id="currentPets" rows="3"></textarea>
+                                            <textarea class="form-control" id="currentPets" name="currentPets" rows="3"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Have you had pets in the past?</label>
@@ -332,7 +464,7 @@
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hadPets" id="hadPetsNo" value="no">
+                                                <input class="form-check-input" type="radio" name="hadPets" id="hadPetsNo" value="no" checked>
                                                 <label class="form-check-label" for="hadPetsNo">
                                                     No
                                                 </label>
@@ -340,254 +472,252 @@
                                         </div>
                                         <div class="col-12" id="previousPetsSection" style="display: none;">
                                             <label for="previousPets" class="form-label">Please describe your previous pets and what happened to them</label>
-                                            <textarea class="form-control" id="previousPets" rows="3"></textarea>
+                                            <textarea class="form-control" id="previousPets" name="previousPets" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Step 4: Foster Preferences -->
                                 <div class="form-step" id="step4" style="display: none;">
-                                    <h4 class="mb-4">Foster Preferences</h4>
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label class="form-label">What types of animals are you interested in fostering? (Select all that apply)</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterDogs">
-                                                <label class="form-check-label" for="fosterDogs">
-                                                    Dogs
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterPuppies">
-                                                <label class="form-check-label" for="fosterPuppies">
-                                                    Puppies
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterCats">
-                                                <label class="form-check-label" for="fosterCats">
-                                                    Cats
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterKittens">
-                                                <label class="form-check-label" for="fosterKittens">
-                                                    Kittens
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="fosterSmallAnimals">
-                                                <label class="form-check-label" for="fosterSmallAnimals">
-                                                    Small Animals (rabbits, guinea pigs, etc.)
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Are you willing to foster animals with special needs?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsYes" value="yes">
-                                                <label class="form-check-label" for="specialNeedsYes">
-                                                    Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsNo" value="no">
-                                                <label class="form-check-label" for="specialNeedsNo">
-                                                    No
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsMaybe" value="maybe">
-                                                <label class="form-check-label" for="specialNeedsMaybe">
-                                                    Maybe, depending on the needs
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Are you willing to foster animals that need medication?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="needsMedication" id="needsMedicationYes" value="yes">
-                                                <label class="form-check-label" for="needsMedicationYes">
-                                                    Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="needsMedication" id="needsMedicationNo" value="no">
-                                                <label class="form-check-label" for="needsMedicationNo">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Are you willing to foster animals that need socialization or behavioral training?</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="needsTraining" id="needsTrainingYes" value="yes">
-                                                <label class="form-check-label" for="needsTrainingYes">
-                                                    Yes
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="needsTraining" id="needsTrainingNo" value="no">
-                                                <label class="form-check-label" for="needsTrainingNo">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="fosterDuration" class="form-label">How long are you willing to foster?</label>
-                                            <select class="form-select" id="fosterDuration" required>
-                                                <option value="" selected disabled>Select Option</option>
-                                                <option value="emergency">Emergency only (1-7 days)</option>
-                                                <option value="short">Short-term (1-4 weeks)</option>
-                                                <option value="medium">Medium-term (1-3 months)</option>
-                                                <option value="long">Long-term (3+ months)</option>
-                                                <option value="any">Any duration</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a duration.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="hoursAlone" class="form-label">How many hours would the foster animal be alone during the day?</label>
-                                            <select class="form-select" id="hoursAlone" required>
-                                                <option value="" selected disabled>Select Option</option>
-                                                <option value="0-2">0-2 hours</option>
-                                                <option value="3-5">3-5 hours</option>
-                                                <option value="6-8">6-8 hours</option>
-                                                <option value="8+">8+ hours</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select an option.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="fosterExperience" class="form-label">Please describe any previous experience you have with fostering or caring for animals</label>
-                                            <textarea class="form-control" id="fosterExperience" rows="3" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please describe your experience.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            <h4 class="mb-4">Foster Preferences</h4>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">What types of animals are you interested in fostering? (Select all that apply)</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fosterDogs" name="fosterTypes[]" value="dogs">
+                        <label class="form-check-label" for="fosterDogs">
+                            Dogs
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fosterPuppies" name="fosterTypes[]" value="puppies">
+                        <label class="form-check-label" for="fosterPuppies">
+                            Puppies
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fosterCats" name="fosterTypes[]" value="cats">
+                        <label class="form-check-label" for="fosterCats">
+                            Cats
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fosterKittens" name="fosterTypes[]" value="kittens">
+                        <label class="form-check-label" for="fosterKittens">
+                            Kittens
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fosterSmallAnimals" name="fosterTypes[]" value="small_animals">
+                        <label class="form-check-label" for="fosterSmallAnimals">
+                            Small Animals (rabbits, guinea pigs, etc.)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Are you willing to foster animals with special needs?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsYes" value="yes">
+                        <label class="form-check-label" for="specialNeedsYes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsNo" value="no">
+                        <label class="form-check-label" for="specialNeedsNo">
+                            No
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="specialNeeds" id="specialNeedsMaybe" value="maybe">
+                        <label class="form-check-label" for="specialNeedsMaybe">
+                            Maybe, depending on the needs
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Are you willing to foster animals that need medication?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsMedication" id="needsMedicationYes" value="yes">
+                        <label class="form-check-label" for="needsMedicationYes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsMedication" id="needsMedicationNo" value="no">
+                        <label class="form-check-label" for="needsMedicationNo">
+                            No
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Are you willing to foster animals that need socialization or behavioral training?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsTraining" id="needsTrainingYes" value="yes">
+                        <label class="form-check-label" for="needsTrainingYes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsTraining" id="needsTrainingNo" value="no">
+                        <label class="form-check-label" for="needsTrainingNo">
+                            No
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fosterDuration" class="form-label">How long are you willing to foster?</label>
+                    <select class="form-select" id="fosterDuration" name="fosterDuration" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="emergency">Emergency only (1-7 days)</option>
+                        <option value="short">Short-term (1-4 weeks)</option>
+                        <option value="medium">Medium-term (1-3 months)</option>
+                        <option value="long">Long-term (3+ months)</option>
+                        <option value="any">Any duration</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a duration.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="hoursAlone" class="form-label">How many hours would the foster animal be alone during the day?</label>
+                    <select class="form-select" id="hoursAlone" name="hoursAlone" required>
+                        <option value="" selected disabled>Select Option</option>
+                        <option value="0-2">0-2 hours</option>
+                        <option value="3-5">3-5 hours</option>
+                        <option value="6-8">6-8 hours</option>
+                        <option value="8+">8+ hours</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select an option.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="fosterExperience" class="form-label">Please describe any previous experience you have with fostering or caring for animals</label>
+                    <textarea class="form-control" id="fosterExperience" name="fosterExperience" rows="3" required></textarea>
+                    <div class="invalid-feedback">
+                        Please describe your experience.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                <!-- Step 5: References and Agreement -->
-                                <div class="form-step" id="step5" style="display: none;">
-                                    <h4 class="mb-4">References and Agreement</h4>
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <h5>References</h5>
-                                            <p class="text-muted small">Please provide two personal references who are not related to you.</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="reference1Name" class="form-label">Reference 1 Name</label>
-                                            <input type="text" class="form-control" id="reference1Name" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a reference name.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="reference1Phone" class="form-label">Reference 1 Phone</label>
-                                            <input type="tel" class="form-control" id="reference1Phone" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a reference phone number.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="reference1Relationship" class="form-label">Relationship to Reference 1</label>
-                                            <input type="text" class="form-control" id="reference1Relationship" required>
-                                            <div class="invalid-feedback">
-                                                Please describe your relationship.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="reference2Name" class="form-label">Reference 2 Name</label>
-                                            <input type="text" class="form-control" id="reference2Name" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a reference name.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="reference2Phone" class="form-label">Reference 2 Phone</label>
-                                            <input type="tel" class="form-control" id="reference2Phone" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a reference phone number.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="reference2Relationship" class="form-label">Relationship to Reference 2</label>
-                                            <input type="text" class="form-control" id="reference2Relationship" required>
-                                            <div class="invalid-feedback">
-                                                Please describe your relationship.
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mt-4">
-                                            <h5>Veterinary Reference (if applicable)</h5>
-                                            <p class="text-muted small">If you have current or previous pets, please provide your veterinarian's information.</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="vetName" class="form-label">Veterinarian/Clinic Name</label>
-                                            <input type="text" class="form-control" id="vetName">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="vetPhone" class="form-label">Veterinarian Phone</label>
-                                            <input type="tel" class="form-control" id="vetPhone">
-                                        </div>
-                                        <div class="col-12 mt-4">
-                                            <h5>Foster Agreement</h5>
-                                            <div class="alert alert-info">
-                                                <i class="bi bi-info-circle-fill me-2"></i>
-                                                Please read the following agreement carefully before submitting your application.
-                                            </div>
-                                            <div class="foster-agreement p-3 border rounded mb-3" style="max-height: 200px; overflow-y: auto;">
-                                                <p>By submitting this application, I agree to the following terms and conditions:</p>
-                                                <ol>
-                                                    <li>I understand that I will be a temporary caregiver for the animal(s) I foster, and that the animal(s) remain the property of PAFS.</li>
-                                                    <li>I agree to provide a safe, clean, and caring environment for the foster animal(s).</li>
-                                                    <li>I will follow all care instructions provided by PAFS for the foster animal(s).</li>
-                                                    <li>I will not give away, sell, or abandon the foster animal(s) under any circumstances.</li>
-                                                    <li>I will return the foster animal(s) to PAFS upon request or at the end of the agreed foster period.</li>
-                                                    <li>I will notify PAFS immediately if the foster animal(s) become ill, injured, lost, or stolen.</li>
-                                                    <li>I understand that PAFS will provide necessary veterinary care for the foster animal(s), but I must obtain approval before seeking veterinary care except in emergency situations.</li>
-                                                    <li>I understand that PAFS cannot guarantee the health, temperament, or behavior of the foster animal(s).</li>
-                                                    <li>I agree to allow PAFS representatives to visit my home to check on the foster animal(s) with reasonable notice.</li>
-                                                    <li>I understand that I may be required to bring the foster animal(s) to adoption events or to make them available for potential adopters to meet.</li>
-                                                    <li>I understand that PAFS has the right to terminate this foster arrangement at any time.</li>
-                                                    <li>I release PAFS from any and all liability for personal injury, property damage, legal fees, or veterinary care, or any other expense or liability incurred by me during my foster volunteer service.</li>
-                                                </ol>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-                                                <label class="form-check-label" for="agreeTerms">
-                                                    I have read and agree to the Foster Agreement
-                                                </label>
-                                                <div class="invalid-feedback">
-                                                    You must agree to the terms to submit your application.
-                                                </div>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="agreeHomeVisit">
-                                                <label class="form-check-label" for="agreeHomeVisit">
-                                                    I agree to a home visit by a PAFS representative if requested
-                                                </label>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="agreeUpdates">
-                                                <label class="form-check-label" for="agreeUpdates">
-                                                    I agree to provide regular updates and photos of my foster animal(s)
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="additionalComments" class="form-label">Additional Comments or Questions</label>
-                                            <textarea class="form-control" id="additionalComments" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="form-step" id="step5" style="display: none;">
+            <h4 class="mb-4">References and Agreement</h4>
+            <div class="row g-3">
+                <div class="col-12">
+                    <h5>References</h5>
+                    <p class="text-muted small">Please provide two personal references who are not related to you.</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="reference1Name" class="form-label">Reference 1 Name</label>
+                    <input type="text" class="form-control" id="reference1Name" name="reference1Name" required>
+                    <div class="invalid-feedback">
+                        Please provide a reference name.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="reference1Phone" class="form-label">Reference 1 Phone</label>
+                    <input type="tel" class="form-control" id="reference1Phone" name="reference1Phone" required>
+                    <div class="invalid-feedback">
+                        Please provide a reference phone number.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="reference1Relationship" class="form-label">Relationship to Reference 1</label>
+                    <input type="text" class="form-control" id="reference1Relationship" name="reference1Relationship" required>
+                    <div class="invalid-feedback">
+                        Please describe your relationship.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="reference2Name" class="form-label">Reference 2 Name</label>
+                    <input type="text" class="form-control" id="reference2Name" name="reference2Name" required>
+                    <div class="invalid-feedback">
+                        Please provide a reference name.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="reference2Phone" class="form-label">Reference 2 Phone</label>
+                    <input type="tel" class="form-control" id="reference2Phone" name="reference2Phone" required>
+                    <div class="invalid-feedback">
+                        Please provide a reference phone number.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="reference2Relationship" class="form-label">Relationship to Reference 2</label>
+                    <input type="text" class="form-control" id="reference2Relationship" name="reference2Relationship" required>
+                    <div class="invalid-feedback">
+                        Please describe your relationship.
+                    </div>
+                </div>
+                <div class="col-12 mt-4">
+                    <h5>Veterinary Reference (if applicable)</h5>
+                    <p class="text-muted small">If you have current or previous pets, please provide your veterinarian's information.</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="vetName" class="form-label">Veterinarian/Clinic Name</label>
+                    <input type="text" class="form-control" id="vetName" name="vetName">
+                </div>
+                <div class="col-md-6">
+                    <label for="vetPhone" class="form-label">Veterinarian Phone</label>
+                    <input type="tel" class="form-control" id="vetPhone" name="vetPhone">
+                </div>
+                <div class="col-12 mt-4">
+                    <h5>Foster Agreement</h5>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        Please read the following agreement carefully before submitting your application.
+                    </div>
+                    <div class="foster-agreement p-3 border rounded mb-3" style="max-height: 200px; overflow-y: auto;">
+                        <p>By submitting this application, I agree to the following terms and conditions:</p>
+                        <ol>
+                            <li>I understand that I will be a temporary caregiver for the animal(s) I foster, and that the animal(s) remain the property of PAFS.</li>
+                            <li>I agree to provide a safe, clean, and caring environment for the foster animal(s).</li>
+                            <li>I will follow all care instructions provided by PAFS for the foster animal(s).</li>
+                            <li>I will not give away, sell, or abandon the foster animal(s) under any circumstances.</li>
+                            <li>I will return the foster animal(s) to PAFS upon request or at the end of the agreed foster period.</li>
+                            <li>I will notify PAFS immediately if the foster animal(s) become ill, injured, lost, or stolen.</li>
+                            <li>I understand that PAFS will provide necessary veterinary care for the foster animal(s), but I must obtain approval before seeking veterinary care except in emergency situations.</li>
+                            <li>I understand that PAFS cannot guarantee the health, temperament, or behavior of the foster animal(s).</li>
+                            <li>I agree to allow PAFS representatives to visit my home to check on the foster animal(s) with reasonable notice.</li>
+                            <li>I understand that I may be required to bring the foster animal(s) to adoption events or to make them available for potential adopters to meet.</li>
+                            <li>I understand that PAFS has the right to terminate this foster arrangement at any time.</li>
+                            <li>I release PAFS from any and all liability for personal injury, property damage, legal fees, or veterinary care, or any other expense or liability incurred by me during my foster volunteer service.</li>
+                        </ol>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms" value="agree" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            I have read and agree to the Foster Agreement
+                        </label>
+                        <div class="invalid-feedback">
+                            You must agree to the terms to submit your application.
+                        </div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="agreeHomeVisit" name="agreeHomeVisit" value="agree">
+                        <label class="form-check-label" for="agreeHomeVisit">
+                            I agree to a home visit by a PAFS representative if requested
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="agreeUpdates" name="agreeUpdates" value="agree">
+                        <label class="form-check-label" for="agreeUpdates">
+                            I agree to provide regular updates and photos of my foster animal(s)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="additionalComments" class="form-label">Additional Comments or Questions</label>
+                    <textarea class="form-control" id="additionalComments" name="additionalComments" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
 
-                                <!-- Submit Button (only visible on last step) -->
-                                <div class="mt-4 text-center" id="submitButtonContainer" style="display: none;">
-                                    <button type="submit" class="btn btn-primary btn-lg px-5">Submit Application</button>
-                                </div>
+        <div class="mt-4 text-center" id="submitButtonContainer" style="display: none;">
+            <button type="submit" id="btnsubmit" name="btnsubmit" class="btn btn-primary btn-lg px-5">Submit Application</button>
+            
+        </div>
                             </form>
                         </div>
                     </div>
@@ -892,23 +1022,15 @@
                     }
                 });
             });
-            
+        
+
             // Form submission
-            const fosterApplicationForm = document.getElementById('fosterApplicationForm');
-            
-            fosterApplicationForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                if (fosterApplicationForm.checkValidity()) {
-                    // Here you would normally send the form data to your server
-                    alert('Thank you for your application! We will contact you soon.');
-                    // Redirect to thank you page or reset form
-                    window.location.href = 'foster.html';
-                } else {
-                    // Trigger validation display
-                    fosterApplicationForm.classList.add('was-validated');
-                }
+            document.getElementById('fosterApplicationForm').addEventListener('submit', function(e) {
+                // Let the form submit normally to PHP (no preventDefault)
+                // Optional: scroll to top after clicking submit
+            window.scrollTo(0, 0);
             });
+
             
             // Housing status change
             const housingStatus = document.getElementById('housingStatus');
