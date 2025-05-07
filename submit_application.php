@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
     
         if ($stmt->execute()) {
-            header('Location: adoption-application.php');
+            header('Location: pets.php');
             exit();
         } else {
             echo "Error submitting application: " . $stmt->error;

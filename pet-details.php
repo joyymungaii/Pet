@@ -140,7 +140,9 @@ $conn->close();
                             </div>
 
                         <div class="d-grid gap-2 mb-4">
-                        <a href="adoption-application.php?pet_id=<?php echo htmlspecialchars($pet['pet_id']); ?>" class="btn btn-primary">Start Adoption Process</a>                            <a href="foster-application.html?id=<?php echo $pet['pet_id']; ?>" class="btn btn-outline-primary btn-lg">Apply to Foster</a>
+                        <a href="adoption-application.php?pet_id=<?php echo htmlspecialchars($pet['pet_id']); ?>" class="btn btn-primary">Start Adoption Process</a>
+                         <a href="foster-application.html?id=<?php echo $pet['pet_id']; ?>" class="btn btn-outline-primary btn-lg">Apply to Foster</a>
+
                         </div>
 
                         <div class="d-flex mb-4">

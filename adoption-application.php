@@ -1,11 +1,47 @@
 <?php
 // adoption-application.php
+
+// 1. Database Connection (Replace with your actual credentials)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pet_adoption";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// 2. Get and Validate Pet ID
 $pet_id = filter_input(INPUT_GET, 'pet_id', FILTER_SANITIZE_NUMBER_INT);
 if (!$pet_id) {
     // Handle the case where pet_id is missing or invalid
     echo "Error: Invalid pet ID.";
+    $conn->close(); // Close the connection before exiting
     exit();
 }
+
+// 3. Fetch Pet Data from the Database
+$sql = "SELECT name, breed, gender, image_url FROM pets WHERE pet_id = ?"; // Assuming your pet table is named 'pets' and has these columns
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $pet_id); // "i" indicates integer
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    // Handle the case where the pet with the given ID doesn't exist
+    echo "Error: Pet not found.";
+    $stmt->close();
+    $conn->close();
+    exit();
+}
+
+$pet = $result->fetch_assoc();
+
+$stmt->close();
+$conn->close();
 ?>
 
 
@@ -74,10 +110,10 @@ if (!$pet_id) {
                 </div>
                 <div class="col-md-4 text-md-end">
                     <div class="d-flex align-items-center justify-content-md-end">
-                        <img src="images/dog1.jpg" alt="Buddy" class="rounded-circle" width="60" height="60" style="object-fit: cover;">
-                        <div class="ms-3">
-                            <h5 class="mb-0">Buddy</h5>
-                            <p class="text-muted mb-0">Golden Retriever • Male</p>
+                    <img src="<?php echo htmlspecialchars($pet['image_url']); ?>" alt="<?php echo htmlspecialchars($pet['name']); ?>" class="rounded-circle" width="60" height="60" style="object-fit: cover;">
+                    <div class="ms-3">
+                        <h3><?php echo htmlspecialchars($pet['name']); ?></h3>
+                        <p class="text-muted"><?php echo htmlspecialchars($pet['breed']); ?> • <?php echo htmlspecialchars(ucfirst($pet['gender'])); ?></p>
                         </div>
                     </div>
                 </div>
@@ -115,31 +151,31 @@ if (!$pet_id) {
 
                                 <div class="col-md-6">
                                     <label for="first-name" class="form-label">First Name *</label>
-                                    <input type="text" class="form-control" name="first-name" required>
+                                    <input type="text" class="form-control" id="first-name" name="first_name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="last-name" class="form-label">Last Name *</label>
-                                    <input type="text" class="form-control" name="last-name" required>
+                                    <input type="text" class="form-control" id="last-name" name="last_name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email Address *</label>
-                                    <input type="email" class="form-control" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone" class="form-label">Phone Number *</label>
-                                    <input type="tel" class="form-control" name="phone" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="form-label">Street Address *</label>
-                                    <input type="text" class="form-control" name="address" required>
+                                    <input type="text" class="form-control" id="address"  name="address" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="city" class="form-label">City *</label>
-                                    <input type="text" class="form-control" name="city" required>
+                                    <input type="text" class="form-control" id="city" name="city" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="state" class="form-label">State *</label>
-                                    <select class="form-select" name="state" required>
+                                    <select class="form-select" id="state" name="state" required>
                                         <option value="" selected disabled>Select State</option>
                                         <option value="AL">Alabama</option>
                                         <option value="AK">Alaska</option>
@@ -149,11 +185,11 @@ if (!$pet_id) {
                                 </div>
                                 <div class="col-md-4">
                                     <label for="zip" class="form-label">ZIP Code *</label>
-                                    <input type="text" class="form-control" name="zip" required>
+                                    <input type="text" class="form-control" id="zip" name="zip" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="age" class="form-label">Age *</label>
-                                    <select class="form-select" name="age" required>
+                                    <select class="form-select" name="age" id="age" required>
                                         <option value="" selected disabled>Select Age Range</option>
                                         <option value="18-25">18-25</option>
                                         <option value="26-35">26-35</option>
@@ -165,7 +201,7 @@ if (!$pet_id) {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="occupation" class="form-label">Occupation *</label>
-                                    <input type="text" class="form-control" name="occupation" required>
+                                    <input type="text" class="form-control" id="occupation" name="occupation" required>
                                 </div>
                             </div>
                             
@@ -181,7 +217,7 @@ if (!$pet_id) {
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="housing-type" class="form-label">Housing Type *</label>
-                                    <select class="form-select" name="housing-type" required>
+                                    <select class="form-select" name="housing-type"  id="housing-type"required>
                                         <option value="" selected disabled>Select Housing Type</option>
                                         <option value="house">House</option>
                                         <option value="apartment">Apartment</option>
@@ -193,7 +229,7 @@ if (!$pet_id) {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ownership" class="form-label">Do you own or rent? *</label>
-                                    <select class="form-select" name="ownership" required>
+                                    <select class="form-select" id="ownership" name="ownership" id="ownership" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="own">Own</option>
                                         <option value="rent">Rent</option>
@@ -207,15 +243,15 @@ if (!$pet_id) {
                                             <div class="row g-3">
                                                 <div class="col-md-6">
                                                     <label for="landlord-name" class="form-label">Landlord Name *</label>
-                                                    <input type="text" class="form-control" name="landlord-name">
+                                                    <input type="text" class="form-control" name="landlord-name" id="landlord-name">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="landlord-phone" class="form-label">Landlord Phone *</label>
-                                                    <input type="tel" class="form-control" name="landlord-phone">
+                                                    <input type="tel" class="form-control" name="landlord-phone" id="landlord-phone">
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="pet-permission">
+                                                        <input class="form-check-input" type="checkbox" name="pet-permission" id="pet-permission">
                                                         <label class="form-check-label" for="pet-permission">
                                                             I have permission to have pets in my rental
                                                         </label>
@@ -228,7 +264,7 @@ if (!$pet_id) {
                                 
                                 <div class="col-md-6">
                                     <label for="yard" class="form-label">Do you have a yard? *</label>
-                                    <select class="form-select" name="yard" required>
+                                    <select class="form-select" name="yard" id="yard" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="yes-fenced">Yes, fenced</option>
                                         <option value="yes-unfenced">Yes, unfenced</option>
@@ -237,7 +273,7 @@ if (!$pet_id) {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fence-height" class="form-label">If fenced, how tall is the fence?</label>
-                                    <select class="form-select" name="fence-height">
+                                    <select class="form-select" name="fence-height" id="fence-height">
                                         <option value="" selected disabled>Select Height</option>
                                         <option value="less-than-4">Less than 4 feet</option>
                                         <option value="4-6">4-6 feet</option>
@@ -250,22 +286,22 @@ if (!$pet_id) {
                                     <div class="row g-3">
                                         <div class="col-md-4">
                                             <label for="adults" class="form-label">Adults (18+)</label>
-                                            <input type="number" class="form-control" name="adults" min="1" value="1" required>
+                                            <input type="number" class="form-control" name="adults" id="adults" min="1" value="1" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="children" class="form-label">Children (under 18)</label>
-                                            <input type="number" class="form-control" name="children" min="0" value="0">
+                                            <input type="number" class="form-control" name="children" id="children" min="0" value="0">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="seniors" class="form-label">Seniors (65+)</label>
-                                            <input type="number" class="form-control" name="seniors" min="0" value="0">
+                                            <input type="number" class="form-control" name="seniors" id="seniors" min="0" value="0">
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12" id="children-ages" style="display: none;">
                                     <label for="children-ages-input" class="form-label">Ages of children in the home:</label>
-                                    <input type="text" class="form-control" name="children-ages-input" placeholder="e.g., 5, 8, 12">
+                                    <input type="text" class="form-control" name="children-ages-input" id="children-ages-input" placeholder="e.g., 5, 8, 12">
                                 </div>
                                 
                                 <div class="col-12">
@@ -282,7 +318,7 @@ if (!$pet_id) {
                                 
                                 <div class="col-12" id="allergies-details" style="display: none;">
                                     <label for="allergies-description" class="form-label">Please describe the allergies:</label>
-                                    <textarea class="form-control" name="allergies-description" rows="2"></textarea>
+                                    <textarea class="form-control" name="allergies-description" id="allergies-description" rows="2"></textarea>
                                 </div>
                             </div>
                             
@@ -317,7 +353,7 @@ if (!$pet_id) {
                                                 <div class="row g-3 mb-3 current-pet-row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Type</label>
-                                                        <select class="form-select" name>
+                                                        <select class="form-select" name="current-pet-name">
                                                             <option value="" selected disabled>Select Type</option>
                                                             <option value="dog">Dog</option>
                                                             <option value="cat">Cat</option>
@@ -374,7 +410,7 @@ if (!$pet_id) {
                                 
                                 <div class="col-12" id="past-pets-details" style="display: none;">
                                     <label for="past-pets-description" class="form-label">Please describe your past pets and what happened to them:</label>
-                                    <textarea class="form-control" name="past-pets-description" rows="3"></textarea>
+                                    <textarea class="form-control" name="past-pets-description" id="past-pets-description"  rows="3"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
@@ -382,18 +418,18 @@ if (!$pet_id) {
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="vet-name" class="form-label">Veterinarian/Clinic Name</label>
-                                            <input type="text" class="form-control" name="vet-name">
+                                            <input type="text" class="form-control" name="vet-name" id="vet-name">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="vet-phone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" name="vet-phone">
+                                            <input type="tel" class="form-control" name="vet-phone" id="vet-phone">
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-care" class="form-label">How many hours per day will the pet be left alone? *</label>
-                                    <select class="form-select" name="pet-care" required>
+                                    <select class="form-select" name="pet-care"  id="pet-care" required>
                                         <option value="" selected disabled>Select Option</option>
                                         <option value="0-2">0-2 hours</option>
                                         <option value="3-5">3-5 hours</option>
@@ -404,17 +440,17 @@ if (!$pet_id) {
                                 
                                 <div class="col-12">
                                     <label for="pet-sleep" class="form-label">Where will the pet sleep at night? *</label>
-                                    <input type="text" class="form-control" name="pet-sleep" required>
+                                    <input type="text" class="form-control" name="pet-sleep" id="pet-sleep" required>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-exercise" class="form-label">How will you exercise the pet? *</label>
-                                    <textarea class="form-control" name="pet-exercise" rows="2" required></textarea>
+                                    <textarea class="form-control" name="pet-exercise"  id="pet-exercise"rows="2" required></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="pet-training" class="form-label">What training plans do you have for the pet?</label>
-                                    <textarea class="form-control" name="pet-training" rows="2"></textarea>
+                                    <textarea class="form-control" name="pet-training" id="pet-training" rows="2"></textarea>
                                 </div>
                             </div>
                             
@@ -431,18 +467,18 @@ if (!$pet_id) {
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="additional-info" class="form-label">Is there anything else you'd like us to know about you or your home?</label>
-                                    <textarea class="form-control" name="additional-info" rows="3"></textarea>
+                                    <textarea class="form-control" name="additional-info" id="additional-info" rows="3"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="questions" class="form-label">Do you have any questions for us?</label>
-                                    <textarea class="form-control" name="questions" rows="2"></textarea>
+                                    <textarea class="form-control" name="questions" id="questions" rows="2"></textarea>
                                 </div>
                                 
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="terms-agree" required>
-                                        <label class="form-check-label" for="terms-agree">
+                                        <label class="form-check-label" for="terms-agree" >
                                             I understand that submission of this application does not guarantee adoption and that the rescue organization reserves the right to deny any application. *
                                         </label>
                                     </div>
@@ -535,6 +571,38 @@ if (!$pet_id) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const ownershipSelect = document.getElementById('ownership');
+    const landlordInfoDiv = document.getElementById('landlord-info');
+    const landlordNameInput = document.getElementById('landlord-name');
+    const landlordPhoneInput = document.getElementById('landlord-phone');
+
+    function toggleLandlordRequired() {
+        if (ownershipSelect.value === 'rent') {
+            if (landlordNameInput) landlordNameInput.required = true;
+            if (landlordPhoneInput) landlordPhoneInput.required = true;
+        } else {
+            if (landlordNameInput) landlordNameInput.required = false;
+            if (landlordPhoneInput) landlordPhoneInput.required = false;
+        }
+    }
+
+    // Initial call to set required on page load (in case "Rent" is the default)
+    toggleLandlordRequired();
+
+    // Event listener for ownership change
+    ownershipSelect.addEventListener('change', function() {
+        if (this.value === 'rent') {
+            landlordInfoDiv.style.display = 'block';
+            toggleLandlordRequired(); // Make them required when shown
+        } else {
+            landlordInfoDiv.style.display = 'none';
+            toggleLandlordRequired(); // Remove required when hidden
+        }
+    });
+
+    // ... your other JavaScript code ...
+});
         // Form step navigation
         function nextStep(currentStep) {
             document.getElementById(`step-${currentStep}`).classList.remove('active');
