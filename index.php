@@ -10,39 +10,9 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <span class="ms-9 fw-bold text-primary fs-2">PAFS</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pets.php">Find a Pet</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="foster.html">Foster</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="resources.html">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
-                    <a href="register.html" class="btn btn-primary">Register</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php
+        include('navbar.php');
+    ?>
     <?php
         session_start();
         if (isset($_SESSION['success_message'])) {
@@ -59,135 +29,15 @@
                     <h1 class="display-4 fw-bold mb-4">Find Your Perfect Companion</h1>
                     <p class="lead mb-4">Connect with shelters and rescue organizations to adopt or foster pets in need of loving homes.</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                        <a href="pets.html" class="btn btn-primary btn-lg px-4 me-sm-3">Find a Pet</a>
-                        <a href="foster.html" class="btn btn-outline-light btn-lg px-4">Become a Foster</a>
+                        <a href="pets.php" class="btn btn-primary btn-lg px-4 me-sm-3">Find a Pet</a>
+                        <a href="foster.php" class="btn btn-outline-light btn-lg px-4">Become a Foster</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Quick Search Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Quick Search</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <form id="quick-search-form">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="pet-type" class="form-label">Pet Type</label>
-                                        <select id="pet-type" class="form-select">
-                                            <option value="">Any</option>
-                                            <option value="dog">Dogs</option>
-                                            <option value="cat">Cats</option>
-                                            <option value="small-animal">Small Animals</option>
-                                            <option value="bird">Birds</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="location" class="form-label">Location</label>
-                                        <input type="text" class="form-control" id="location" placeholder="City or ZIP">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="distance" class="form-label">Distance</label>
-                                        <select id="distance" class="form-select">
-                                            <option value="10">10 miles</option>
-                                            <option value="25">25 miles</option>
-                                            <option value="50" selected>50 miles</option>
-                                            <option value="100">100 miles</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 text-center mt-4">
-                                        <button type="submit" class="btn btn-primary px-4">Search Pets</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Pets Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Featured Pets</h2>
-                <a href="pets.html" class="btn btn-outline-primary">View All</a>
-            </div>
-            <div class="row" id="featured-pets">
-                <!-- Featured pets will be loaded here via JavaScript -->
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/dog.jpeg" class="card-img-top" alt="Buddy">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Buddy</h5>
-                            <p class="card-text text-muted">Golden Retriever • 2 years • Male</p>
-                            <p class="card-text">Friendly and energetic dog who loves to play fetch and go for walks.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=1" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/cat.jpeg" class="card-img-top" alt="Luna">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Luna</h5>
-                            <p class="card-text text-muted">Domestic Shorthair • 1 year • Female</p>
-                            <p class="card-text">Sweet and affectionate cat who enjoys cuddling and playing with toys.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=2" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/dog.jpeg" class="card-img-top" alt="Max">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Max</h5>
-                            <p class="card-text text-muted">Labrador Mix • 3 years • Male</p>
-                            <p class="card-text">Gentle and well-behaved dog who needs a temporary foster home.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=3" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/rabbit1.jpeg" class="card-img-top" alt="Thumper">
-                            <span class="badge bg-success position-absolute top-0 end-0 m-2">Available</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Thumper</h5>
-                            <p class="card-text text-muted">Holland Lop • 6 months • Male</p>
-                            <p class="card-text">Curious and friendly rabbit who enjoys exploring and being petted.</p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=4" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Success Stories Section -->
     <section class="py-5 bg-light">
@@ -198,14 +48,14 @@
                     <div class="card h-100 border-0 shadow">
                         <div class="row g-0">
                             <div class="col-md-5">
-                                <img src="/image/rabbit.jpeg" class="img-fluid rounded-start h-100 object-fit-cover" alt="Success story">
+                                <img src="image/rabbit.jpeg" class="img-fluid rounded-start h-100 object-fit-cover" alt="Success story">
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title">Charlie Found His Forever Home</h5>
                                     <p class="card-text">After 6 months in the shelter, Charlie was adopted by the Johnson family. Now he enjoys daily walks in the park and has become best friends with their son.</p>
                                     <p class="card-text"><small class="text-muted">Adopted 3 months ago</small></p>
-                                    <a href="/foster.html#success" class="btn btn-sm btn-outline-primary">Read Full Story</a>
+                                    <a href="foster.html#success" class="btn btn-sm btn-outline-primary">Read Full Story</a>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +65,7 @@
                     <div class="card h-100 border-0 shadow">
                         <div class="row g-0">
                             <div class="col-md-5">
-                                <img src="/image/success.jpeg" class="img-fluid rounded-start h-100 object-fit-cover" alt="Success story">
+                                <img src="image/success.jpeg" class="img-fluid rounded-start h-100 object-fit-cover" alt="Success story">
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
@@ -277,7 +127,7 @@
                     <p class="lead mb-0">Join our network to increase visibility for your adoptable pets and streamline your adoption process.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="shelter-signup.html" class="btn btn-light btn-lg">Register Your Organization</a>
+                    <a href="shelter-signup.php" class="btn btn-light btn-lg">Register Your Organization</a>
                 </div>
             </div>
         </div>

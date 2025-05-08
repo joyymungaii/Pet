@@ -57,39 +57,9 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <span class="ms-9 fw-bold text-primary fs-2">PAFS</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="pets.php">Find a Pet</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="foster.html">Foster</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="resources.html">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
-                    <a href="register.html" class="btn btn-primary">Register</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php
+        include('navbar.php');
+    ?>
 
     <section class="py-5">
         <div class="container">
@@ -141,7 +111,7 @@ $conn->close();
 
                         <div class="d-grid gap-2 mb-4">
                         <a href="adoption-application.php?pet_id=<?php echo htmlspecialchars($pet['pet_id']); ?>" class="btn btn-primary">Start Adoption Process</a>
-                         <a href="foster-application.html?id=<?php echo $pet['pet_id']; ?>" class="btn btn-outline-primary btn-lg">Apply to Foster</a>
+                         <a href="foster-application.php?id=<?php echo $pet['pet_id']; ?>" class="btn btn-outline-primary btn-lg">Apply to Foster</a>
 
                         </div>
 

@@ -1,10 +1,14 @@
 <?php
+// ✅ Enable error reporting for debugging (remove in production)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Database connection details
-$servername = "localhost"; // Replace with your database server name
-$username = "root";      // Replace with your database username
-$password = "";          // Replace with your database password
-$dbname = "pet_adoption"; // Replace with your database name
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pet_adoption";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,8 +18,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check if the request method is POST AND the btnsubmit button was pressed
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsubmit'])) {
     // Function to sanitize input data
     function sanitize_input($data) {
         $data = trim($data);
@@ -24,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $data;
     }
 
-    // Retrieve data from the form (Steps 1-3)
+    // Retrieve and sanitize form data
     $firstName = sanitize_input($_POST["firstName"]);
     $lastName = sanitize_input($_POST["lastName"]);
     $email = sanitize_input($_POST["email"]);
@@ -38,24 +42,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emergencyContact = sanitize_input($_POST["emergencyContact"]);
     $housingType = sanitize_input($_POST["housingType"]);
     $housingStatus = sanitize_input($_POST["housingStatus"]);
-    $yardDescription = sanitize_input($_POST["yardDescription"]);
-    $adultsCount = sanitize_input($_POST["adultsCount"]);
-    $childrenCount = sanitize_input($_POST["childrenCount"]);
-
     $landlordName = isset($_POST["landlordName"]) ? sanitize_input($_POST["landlordName"]) : NULL;
     $landlordPhone = isset($_POST["landlordPhone"]) ? sanitize_input($_POST["landlordPhone"]) : NULL;
+    $yardDescription = sanitize_input($_POST["yardDescription"]);
     $fenceDetails = isset($_POST["fenceDetails"]) ? sanitize_input($_POST["fenceDetails"]) : NULL;
-    $hasPool = isset($_POST["hasPool"]) ? 1 : 0; // Convert checkbox to boolean
+    $hasPool = isset($_POST["hasPool"]) ? 1 : 0;
     $poolDetails = isset($_POST["poolDetails"]) ? sanitize_input($_POST["poolDetails"]) : NULL;
+    $adultsCount = sanitize_input($_POST["adultsCount"]);
+    $childrenCount = sanitize_input($_POST["childrenCount"]);
     $childrenAges = isset($_POST["childrenAges"]) ? sanitize_input($_POST["childrenAges"]) : NULL;
-    $hasAllergies = isset($_POST["hasAllergies"]) ? 1 : 0; // Convert checkbox to boolean
+    $hasAllergies = isset($_POST["hasAllergies"]) ? 1 : 0;
     $allergiesDetails = isset($_POST["allergiesDetails"]) ? sanitize_input($_POST["allergiesDetails"]) : NULL;
-    $hasPets = isset($_POST["hasPets"]) ? 1 : 0; // Convert checkbox to boolean
+    $hasPets = isset($_POST["hasPets"]) ? 1 : 0;
     $currentPets = isset($_POST["currentPets"]) ? sanitize_input($_POST["currentPets"]) : NULL;
-    $hadPets = isset($_POST["hadPets"]) ? 1 : 0; // Convert checkbox to boolean
+    $hadPets = isset($_POST["hadPets"]) ? 1 : 0;
     $previousPets = isset($_POST["previousPets"]) ? sanitize_input($_POST["previousPets"]) : NULL;
-
-    // Retrieve data from the form (Step 4: Foster Preferences)
     $fosterDogs = isset($_POST["fosterDogs"]) ? 1 : 0;
     $fosterPuppies = isset($_POST["fosterPuppies"]) ? 1 : 0;
     $fosterCats = isset($_POST["fosterCats"]) ? 1 : 0;
@@ -67,8 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fosterDuration = sanitize_input($_POST["fosterDuration"]);
     $hoursAlone = sanitize_input($_POST["hoursAlone"]);
     $fosterExperience = sanitize_input($_POST["fosterExperience"]);
-
-    // Retrieve data from the form (Step 5: References and Agreement)
     $reference1Name = sanitize_input($_POST["reference1Name"]);
     $reference1Phone = sanitize_input($_POST["reference1Phone"]);
     $reference1Relationship = sanitize_input($_POST["reference1Relationship"]);
@@ -82,60 +81,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $agreedUpdates = isset($_POST["agreeUpdates"]) ? 1 : 0;
     $additionalComments = isset($_POST["additionalComments"]) ? sanitize_input($_POST["additionalComments"]) : NULL;
 
-    // Prepare the SQL statement
+    // SQL insert with 51 placeholders
     $sql = "INSERT INTO application_data (
-        firstName, lastName, email, phone, streetAddress, city, state, zipCode, occupation, employer, emergencyContact,
-        housingType, housingStatus, landlordName, landlordPhone, yardDescription, fenceDetails, hasPool, poolDetails,
-        adultsCount, childrenCount, childrenAges, hasAllergies, allergiesDetails, hasPets, currentPets, hadPets, previousPets,
-        fosterDogs, fosterPuppies, fosterCats, fosterKittens, fosterSmallAnimals, willingSpecialNeeds, willingMedication,
-        willingTraining, fosterDuration, hoursAlone, fosterExperience, reference1Name, reference1Phone,
-        reference1Relationship, reference2Name, reference2Phone, reference2Relationship, vetName, vetPhone,
-        agreedTerms, agreedHomeVisit, agreedUpdates, additionalComments
+        firstName, lastName, email, phone, streetAddress, 
+        city, state, zipCode, occupation, employer, 
+        emergencyContact,housingType, housingStatus, landlordName, landlordPhone, 
+        yardDescription,fenceDetails, hasPool, poolDetails,adultsCount, 
+        childrenCount, childrenAges, hasAllergies, allergiesDetails, hasPets, 
+        currentPets,hadPets, previousPets,fosterDogs, fosterPuppies, 
+        fosterCats, fosterKittens, fosterSmallAnimals, willingSpecialNeeds, willingMedication,
+        willingTraining, fosterDuration, hoursAlone, fosterExperience, reference1Name,
+        reference1Phone,reference1Relationship, reference2Name, reference2Phone, reference2Relationship,
+        vetName, vetPhone,agreedTerms, agreedHomeVisit, agreedUpdates,
+        additionalComments
     ) VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, 
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?,
+        ?
     )";
-
-    // Create a prepared statement
+//sssssssssssssssssisiisisisisiiiisiisssssssssssiiis
     $stmt = $conn->prepare($sql);
-
     if ($stmt) {
-        // Bind parameters to the prepared statement
-        $stmt->bind_param("sssssssssssssssssiiisssisssssssssssssssssssss",
-            $firstName, $lastName, $email, $phone, $streetAddress, $city, $state, $zipCode, $occupation, $employer, $emergencyContact,
-            $housingType, $housingStatus, $landlordName, $landlordPhone, $yardDescription, $fenceDetails, $hasPool, $poolDetails,
-            $adultsCount, $childrenCount, $childrenAges, $hasAllergies, $allergiesDetails, $hasPets, $currentPets, $hadPets, $previousPets,
-            $fosterDogs, $fosterPuppies, $fosterCats, $fosterKittens, $fosterSmallAnimals, $willingSpecialNeeds, $willingMedication,
-            $willingTraining, $fosterDuration, $hoursAlone, $fosterExperience, $reference1Name, $reference1Phone,
-            $reference1Relationship, $reference2Name, $reference2Phone, $reference2Relationship, $vetName, $vetPhone,
-            $agreedTerms, $agreedHomeVisit, $agreedUpdates, $additionalComments
-        );
-
-        // Execute the prepared statement
+        $stmt->bind_param("sssssssssssssssssisiiisiiisssssiiissssssssssssiiiis",
+    $firstName, $lastName, $email, $phone, $streetAddress, $city, $state, $zipCode, $occupation, $employer, $emergencyContact,
+    $housingType, $housingStatus, $landlordName, $landlordPhone, $yardDescription, $fenceDetails, $hasPool, $poolDetails,
+    $adultsCount, $childrenCount, $childrenAges, $hasAllergies, $allergiesDetails, $hasPets, $currentPets, $hadPets, $previousPets,
+    $fosterDogs, $fosterPuppies, $fosterCats, $fosterKittens, $fosterSmallAnimals, $willingSpecialNeeds, $willingMedication,
+    $willingTraining, $fosterDuration, $hoursAlone, $fosterExperience, $reference1Name, $reference1Phone,
+    $reference1Relationship, $reference2Name, $reference2Phone, $reference2Relationship, $vetName, $vetPhone,
+    $agreedTerms, $agreedHomeVisit, $agreedUpdates, $additionalComments
+);
         if ($stmt->execute()) {
-            echo "Foster application data submitted successfully!";
-            // Optionally, redirect the user to a thank you page:
-            header("Location: pet.php");
-            exit();
+            header('Location: pets.php');
+            echo "<div class='alert alert-success' role='alert'>Foster application data submitted successfully!</div>";
+            
+        
         } else {
-            echo "Error submitting foster application data: " . $stmt->error;
+            echo "<div class='alert alert-danger' role='alert'>Error submitting data: " . $stmt->error . "</div>";
         }
-
-        // Close the prepared statement
         $stmt->close();
     } else {
-        echo "Error preparing SQL statement: " . $conn->error;
+        echo "<div class='alert alert-danger' role='alert'>SQL prepare failed: " . $conn->error . "</div>";
     }
-} else {
-    // This block will execute if the request method is not POST
-    echo "This script only accepts POST requests.";
-}
+} // Closing brace for the main IF block
 
 // Close the database connection
 $conn->close();
-
 ?>

@@ -59,15 +59,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare the SQL query
     $sql = "INSERT INTO pet_adoption_applications (
-                pet_id, first_name, last_name, email, phone, address, city, state, zip, age_range,
-                occupation, housing_type, ownership, landlord_name, landlord_phone, pet_permission,
-                yard, fence_height, adults_in_home, children_in_home, seniors_in_home, children_ages,
-                allergies, allergies_description, current_pets, past_pets, past_pets_description,
-                vet_name, vet_phone, hours_left_alone, sleep_location, exercise_plans, training_plans,
-                additional_info, applicant_questions, terms_agreement, home_visit_agreement,
-                accurate_info_agreement, application_date
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //1        pet_id, first_name, last_name, email, phone, 
+        //2     address, city, state, zip, age_range,
+        //3        occupation, housing_type, ownership, landlord_name, landlord_phone, 
+        //4        pet_permission,yard, fence_height, adults_in_home, children_in_home, 
+        //5        seniors_in_home, children_ages, allergies, allergies_description, current_pets, 
+        //6        past_pets, past_pets_description, vet_name, vet_phone, hours_left_alone, 
+        //7        sleep_location, exercise_plans, training_plans, additional_info, applicant_questions, 
+        //8        terms_agreement, home_visit_agreement,accurate_info_agreement, application_date //=39
+            ) VALUES (  ?, ?, ?, ?, ?, //1 
+                        ?, ?, ?, ?, ?, //2
+                        ?, ?, ?, ?, ?, //3
+                        ?, ?, ?, ?, ?, //4
+                        ?, ?, ?, ?, ?, //5
+                        ?, ?, ?, ?, ?, //6
+                        ?, ?, ?, ?, ?, //7
+                        ?, ?, ?, ?, ?, //8
+                        ?)"; 
 
     $stmt = $conn->prepare($sql);
 
