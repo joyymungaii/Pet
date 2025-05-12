@@ -190,20 +190,20 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-6 col-md-3 mb-4 text-center">
-                    <img src="/image/logo1.jpeg" alt="Partner Logo" class="img-fluid partner-logo">
+                    <img src="image/logo1.jpeg" alt="Partner Logo" class="img-fluid partner-logo">
                 </div>
                 <div class="col-6 col-md-3 mb-4 text-center">
-                    <img src="/image/logo2.png" alt="Partner Logo" class="img-fluid partner-logo">
+                    <img src="image/logo2.png" alt="Partner Logo" class="img-fluid partner-logo">
                 </div>
                 <div class="col-6 col-md-3 mb-4 text-center">
-                    <img src="/image/logo3.png" alt="Partner Logo" class="img-fluid partner-logo">
+                    <img src="image/logo3.png" alt="Partner Logo" class="img-fluid partner-logo">
                 </div>
                 <div class="col-6 col-md-3 mb-4 text-center">
-                    <img src="/image/logo8.jpeg" alt="Partner Logo" class="img-fluid partner-logo">
+                    <img src="image/logo8.jpeg" alt="Partner Logo" class="img-fluid partner-logo">
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="shelter-signup.html" class="btn btn-outline-primary">Become a Partner</a>
+                <a href="shelter-signup.php" class="btn btn-outline-primary">Become a Partner</a>
             </div>
         </div>
     </section>
@@ -225,7 +225,7 @@
                             <h4>Adopt </h4>
                             <p>Open your heart and home to a pet in need.</p>
                             <div class="mt-3">
-                                <a href="pets.html" class="btn btn-light">Find a Pet</a>
+                                <a href="pets.php" class="btn btn-light">Find a Pet</a>
                             </div>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
                             <h4>Foster</h4>
                             <p>Fostering saves lives and provides animals with the love and care they need until they find their forever homes.</p>
                             <div class="mt-3">
-                                <a href="foster.html" class="btn btn-outline-light ms-2">Learn About Fostering</a>
+                                <a href="foster.php" class="btn btn-outline-light ms-2">Learn About Fostering</a>
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@
                             <h4>Partnership</h4>
                             <p>Partner with us.</p>
                             <div class="mt-3">
-                                <a href="/shelter-signup.html" class="btn btn-light">Partner</a>
+                                <a href="shelter-signup.php" class="btn btn-light">Partner</a>
                             </div>
                         </div>
                     </div>

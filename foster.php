@@ -203,84 +203,98 @@
     </section>
 
     <!-- Pets Needing Foster Homes -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Pets Needing Foster Homes</h2>
-                <a href="pets.html?status=foster" class="btn btn-outline-primary">View All</a>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/dog.jpeg" class="card-img-top" alt="Max">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Max</h5>
-                            <p class="card-text text-muted">Labrador Mix • 3 years • Male</p>
-                            <p class="card-text">Gentle and well-behaved dog who needs a temporary foster home while recovering from surgery.</p>
-                            <p class="mb-0"><small class="text-muted">Second Chance Rescue • 8.1 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=3" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/cat.jpeg" class="card-img-top" alt="Daisy">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Daisy</h5>
-                            <p class="card-text text-muted">Border Collie Mix • 2 years • Female</p>
-                            <p class="card-text">Sweet and shy dog who needs socialization in a home environment before being ready for adoption.</p>
-                            <p class="mb-0"><small class="text-muted">Paws & Hearts • 4.8 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=9" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/rabbit.jpeg" class="card-img-top" alt="Mittens">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Mittens</h5>
-                            <p class="card-text text-muted">Domestic Shorthair • 3 months • Female</p>
-                            <p class="card-text">Playful kitten who needs a foster home until she's old enough for spaying and adoption.</p>
-                            <p class="mb-0"><small class="text-muted">Feline Friends Shelter • 5.7 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=10" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card h-100 pet-card">
-                        <div class="position-relative">
-                            <img src="/image/dog.jpeg" class="card-img-top" alt="Cooper">
-                            <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Cooper</h5>
-                            <p class="card-text text-muted">Beagle • 5 years • Male</p>
-                            <p class="card-text">Friendly dog who needs a quiet foster home while he recovers from heartworm treatment.</p>
-                            <p class="mb-0"><small class="text-muted">Happy Tails Rescue • 3.2 miles away</small></p>
-                        </div>
-                        <div class="card-footer bg-white border-top-0">
-                            <a href="pet-details.html?id=11" class="btn btn-primary w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php
+    // Database connection details (replace with your actual values)
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "pet_adoption";
+
+    // Number of pets to display per page
+    $petsPerPage = 4;
+
+    // Get the current page number from the URL
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    // Calculate the starting index for the database query
+    $startIndex = ($page - 1) * $petsPerPage;
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Fetch foster pets with pagination
+        $stmt = $conn->prepare("SELECT * FROM pets WHERE status = 'foster' LIMIT :start, :limit");
+        $stmt->bindParam(':start', $startIndex, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $petsPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+        $fosterPets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Count total foster pets for pagination
+        $countStmt = $conn->prepare("SELECT COUNT(*) FROM pets WHERE status = 'foster'");
+        $countStmt->execute();
+        $totalFosterPets = $countStmt->fetchColumn();
+        $totalPages = ceil($totalFosterPets / $petsPerPage);
+
+        echo '<section class="py-5 bg-light">';
+        echo '    <div class="container">';
+        echo '        <div class="d-flex justify-content-between align-items-center mb-4">';
+        echo '            <h2>Pets Needing Foster Homes</h2>';
+        echo '            <a href="pets.html?status=foster" class="btn btn-outline-primary">View All</a>';
+        echo '        </div>';
+        echo '        <div class="row">';
+
+        if (!empty($fosterPets)) {
+            foreach ($fosterPets as $pet) {
+                echo '            <div class="col-md-6 col-lg-3 mb-4">';
+                echo '                <div class="card h-100 pet-card">';
+                echo '                    <div class="position-relative">';
+                echo '                        <img src="' . htmlspecialchars($pet['image_url']) . '" class="card-img-top" alt="' . htmlspecialchars($pet['name']) . '">';
+                echo '                        <span class="badge bg-warning position-absolute top-0 end-0 m-2">Foster Only</span>';
+                echo '                    </div>';
+                echo '                    <div class="card-body">';
+                echo '                        <h5 class="card-title">' . htmlspecialchars($pet['name']) . '</h5>';
+                echo '                        <p class="card-text text-muted">' . htmlspecialchars($pet['breed']) . ' • ' . htmlspecialchars($pet['age']) . ' • ' . htmlspecialchars($pet['gender']) . '</p>';
+                echo '                        <p class="card-text">' . htmlspecialchars(substr($pet['description'], 0, 100)) . '...</p>';
+                echo '                        <p class="mb-0"><small class="text-muted">' . htmlspecialchars($pet['shelter_name']) . ' • ' . htmlspecialchars($pet['distance']) . ' miles away</small></p>';
+                echo '                    </div>';
+                echo '                    <div class="card-footer bg-white border-top-0">';
+                echo '                        <a href="pet-details.php?id=' . htmlspecialchars($pet['pet_id']) . '" class="btn btn-primary w-100">View Details</a>';
+                echo '                    </div>';
+                echo '                </div>';
+                echo '            </div>';
+            }
+        } else {
+            echo '            <div class="col-12"><p>No pets currently available for foster.</p></div>';
+        }
+
+        echo '        </div>';
+        echo '    </div>';
+
+        // Pagination links
+        echo '    <nav aria-label="Foster Pets Pagination">';
+        echo '        <ul class="pagination justify-content-center mt-4">';
+        if ($page > 1) {
+            echo '            <li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">Previous</a></li>';
+        }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            $activeClass = ($i === $page) ? ' active' : '';
+            echo '            <li class="page-item' . $activeClass . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+        if ($page < $totalPages) {
+            echo '            <li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">Next</a></li>';
+        }
+        echo '        </ul>';
+        echo '    </nav>';
+
+        echo '</section>';
+
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+
+    $conn = null;
+    ?>
 
     <!-- Foster Requirements -->
     <section class="py-5">
@@ -314,12 +328,12 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
-                        <img src="/image/success.jpeg" class="card-img-top" alt="Success story">
+                        <img src="image/success.jpeg" class="card-img-top" alt="Success story">
                         <div class="card-body">
                             <h5 class="card-title">Luna's Journey</h5>
                             <p class="card-text">When Luna came to us, she was severely underweight and afraid of people. After two months with her foster mom, Sarah, Luna transformed into a confident, healthy cat who was quickly adopted by a loving family.</p>
                             <div class="d-flex align-items-center mt-3">
-                                <img src="/image/dog.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
+                                <img src="image/dog.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
                                 <div>
                                     <h6 class="mb-0">Sarah Johnson</h6>
                                     <p class="text-muted mb-0">Foster Parent for 2 years</p>
@@ -330,12 +344,12 @@
                 </div>
                 <div class="col-lg-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
-                        <img src="/image/rabbit.jpeg" class="card-img-top" alt="Success story">
+                        <img src="image/rabbit.jpeg" class="card-img-top" alt="Success story">
                         <div class="card-body">
                             <h5 class="card-title">Max's Recovery</h5>
                             <p class="card-text">Max was hit by a car and needed extensive surgery and rehabilitation. His foster dad, Michael, provided the care and patience he needed. Now Max is thriving in his forever home with a family who adores him.</p>
                             <div class="d-flex align-items-center mt-3">
-                                <img src="/image/rabbit.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
+                                <img src="image/rabbit.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
                                 <div>
                                     <h6 class="mb-0">Michael Brown</h6>
                                     <p class="text-muted mb-0">Foster Parent for 3 years</p>
@@ -346,12 +360,12 @@
                 </div>
                 <div id="success" class="col-lg-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
-                        <img src="/image/success.jpeg" class="card-img-top" alt="Success story">
+                        <img src="image/success.jpeg" class="card-img-top" alt="Success story">
                         <div class="card-body">
                             <h5 class="card-title">The Puppy Litter</h5>
                             <p class="card-text">When a pregnant stray dog was brought to the shelter, the Rodriguez family stepped up to foster her. They helped her deliver and raise seven healthy puppies, all of whom found wonderful homes.</p>
                             <div class="d-flex align-items-center mt-3">
-                                <img src="/image/dog.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
+                                <img src="image/dog.jpeg" class="rounded-circle me-3" width="50" height="50" alt="Foster parent">
                                 <div>
                                     <h6 class="mb-0">Rodriguez Family</h6>
                                     <p class="text-muted mb-0">Foster Family for 1 year</p>
