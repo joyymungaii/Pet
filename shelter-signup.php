@@ -1,3 +1,6 @@
+<?php
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +16,12 @@
     <?php
         include('navbar.php');
     ?>
+    
 
     <!-- Hero Section -->
     <header class="hero-section text-white text-center" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('image/resources.jpg');">
         <div class="container py-5">
+        
             <div class="row py-5">
                 <div class="col-lg-8 mx-auto">
                     <h1 class="display-4 fw-bold mb-4">Join Our Network of Shelters</h1>
@@ -162,208 +167,188 @@
 
     <!-- Signup Form Section -->
     <section class="py-5" id="signup-form">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4 p-md-5">
-                            <h2 class="text-center mb-4">Shelter Partner Application</h2>
-                            <p class="text-center text-muted mb-5">Please complete all sections of this application. Fields marked with an asterisk (*) are required.</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="text-center mb-4">Shelter Partner Application</h2>
+                        <p class="text-center text-muted mb-5">Please complete all sections of this application. Fields marked with an asterisk (*) are required.</p>
 
-                            <form id="shelterSignupForm" class="needs-validation" novalidate>
-                                <!-- Progress Bar -->
-                                <div class="progress mb-4" style="height: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="formProgress"></div>
+                        <form id="shelterSignupForm" class="needs-validation" novalidate action="shelter_applications.php" method="POST">                            
+                            <div class="progress mb-4" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="formProgress"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-4">
+                                <button type="button" class="btn btn-outline-primary" id="prevBtn" disabled>Previous</button>
+                                <div class="step-indicators">
+                                    <span class="step-indicator active" data-step="1"></span>
+                                    <span class="step-indicator" data-step="2"></span>
+                                    <span class="step-indicator" data-step="3"></span>
+                                    <span class="step-indicator" data-step="4"></span>
                                 </div>
+                                <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+                            </div>
 
-                                <!-- Step Navigation -->
-                                <div class="d-flex justify-content-between mb-4">
-                                    <button type="button" class="btn btn-outline-primary" id="prevBtn" disabled>Previous</button>
-                                    <div class="step-indicators">
-                                        <span class="step-indicator active" data-step="1"></span>
-                                        <span class="step-indicator" data-step="2"></span>
-                                        <span class="step-indicator" data-step="3"></span>
-                                        <span class="step-indicator" data-step="4"></span>
+                            <div class="form-step" id="step1">
+                                <h4 class="mb-4">Organization Information</h4>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="shelterName" class="form-label">Organization Name *</label>
+                                        <input type="text" class="form-control" id="shelterName" name="shelterName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your organization name.
+                                        </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
-                                </div>
+                                    <div class="col-md-6">
+                                        <label for="shelterType" class="form-label">Organization Type *</label>
+                                        <select class="form-select" id="shelterType" name="shelterType" required>
+                                            <option value="" selected disabled>Select Type</option>
+                                            <option value="municipal">Municipal Animal Shelter</option>
+                                            <option value="nonprofit">Non-Profit Rescue</option>
+                                            <option value="sanctuary">Animal Sanctuary</option>
+                                            <option value="foster">Foster-Based Rescue</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your organization type.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="yearEstablished" class="form-label">Year Established *</label>
+                                        <input type="number" class="form-control" id="yearEstablished" name="yearEstablished" min="1900" max="2023" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid year.
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="taxId" class="form-label">Tax ID / EIN (for non-profits) *</label>
+                                        <input type="text" class="form-control" id="taxId" name="taxId" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your Tax ID or EIN.
+                                        </div>
+                                    </div>
 
-                                <!-- Step 1: Organization Information -->
-                                <div class="form-step" id="step1">
-                                    <h4 class="mb-4">Organization Information</h4>
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="shelterName" class="form-label">Organization Name *</label>
-                                            <input type="text" class="form-control" id="shelterName" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your organization name.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="shelterType" class="form-label">Organization Type *</label>
-                                            <select class="form-select" id="shelterType" required>
-                                                <option value="" selected disabled>Select Type</option>
-                                                <option value="municipal">Municipal Animal Shelter</option>
-                                                <option value="nonprofit">Non-Profit Rescue</option>
-                                                <option value="sanctuary">Animal Sanctuary</option>
-                                                <option value="foster">Foster-Based Rescue</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select your organization type.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="yearEstablished" class="form-label">Year Established *</label>
-                                            <input type="number" class="form-control" id="yearEstablished" min="1900" max="2023" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a valid year.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="taxId" class="form-label">Tax ID / EIN (for non-profits) *</label>
-                                            <input type="text" class="form-control" id="taxId" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your Tax ID or EIN.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="missionStatement" class="form-label">Mission Statement *</label>
-                                            <textarea class="form-control" id="missionStatement" rows="3" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please enter your mission statement.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="websiteUrl" class="form-label">Website URL</label>
-                                            <input type="url" class="form-control" id="websiteUrl" placeholder="https://www.example.org">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="facebookUrl" class="form-label">Facebook Page</label>
-                                            <input type="url" class="form-control" id="facebookUrl" placeholder="https://www.facebook.com/yourpage">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="instagramHandle" class="form-label">Instagram Handle</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">@</span>
-                                                <input type="text" class="form-control" id="instagramHandle">
-                                            </div>
+
+                                    <div class="col-12">
+                                        <label for="websiteUrl" class="form-label">Website URL</label>
+                                        <input type="url" class="form-control" id="websiteUrl" name="websiteUrl" placeholder="https://www.example.org">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="facebookUrl" class="form-label">Facebook Page</label>
+                                        <input type="url" class="form-control" id="facebookUrl" name="facebookUrl" placeholder="https://www.facebook.com/yourpage">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="instagramHandle" class="form-label">Instagram Handle</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">@</span>
+                                            <input type="text" class="form-control" id="instagramHandle" name="instagramHandle">
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Step 2: Contact Information -->
-                                <div class="form-step" id="step2" style="display: none;">
-                                    <h4 class="mb-4">Contact Information</h4>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="contactFirstName" class="form-label">Primary Contact First Name *</label>
-                                            <input type="text" class="form-control" id="contactFirstName" required>
-                                            <div class="invalid-feedback">
-                                                Please enter the contact's first name.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="contactLastName" class="form-label">Primary Contact Last Name *</label>
-                                            <input type="text" class="form-control" id="contactLastName" required>
-                                            <div class="invalid-feedback">
-                                                Please enter the contact's last name.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="contactTitle" class="form-label">Title/Position *</label>
-                                            <input type="text" class="form-control" id="contactTitle" required>
-                                            <div class="invalid-feedback">
-                                                Please enter the contact's title.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="contactPhone" class="form-label">Phone Number *</label>
-                                            <input type="tel" class="form-control" id="contactPhone" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a valid phone number.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="contactEmail" class="form-label">Email Address *</label>
-                                            <input type="email" class="form-control" id="contactEmail" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a valid email address.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="physicalAddress" class="form-label">Physical Address *</label>
-                                            <input type="text" class="form-control" id="physicalAddress" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your physical address.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="city" class="form-label">City *</label>
-                                            <input type="text" class="form-control" id="city" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your city.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="state" class="form-label">State *</label>
-                                            <select class="form-select" id="state" required>
-                                                <option value="" selected disabled>Select State</option>
-                                                <option value="AL">Alabama</option>
-                                                <option value="AK">Alaska</option>
-                                                <option value="AZ">Arizona</option>
-                                                <!-- Add all states here -->
-                                                <option value="WY">Wyoming</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select your state.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="zipCode" class="form-label">Zip Code *</label>
-                                            <input type="text" class="form-control" id="zipCode" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your zip code.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="mailingAddress" class="form-label">Mailing Address (if different)</label>
-                                            <input type="text" class="form-control" id="mailingAddress">
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="operatingHours" class="form-label">Operating Hours *</label>
-                                            <textarea class="form-control" id="operatingHours" rows="3" placeholder="e.g., Monday-Friday: 10am-6pm, Saturday: 9am-5pm, Sunday: Closed" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please enter your operating hours.
-                                            </div>
+                            <div class="form-step" id="step2" style="display: none;">
+                                <h4 class="mb-4">Contact Information</h4>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="contactFirstName" class="form-label">Primary Contact First Name *</label>
+                                        <input type="text" class="form-control" id="contactFirstName" name="contactFirstName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the contact's first name.
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <label for="contactLastName" class="form-label">Primary Contact Last Name *</label>
+                                        <input type="text" class="form-control" id="contactLastName" name="contactLastName" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the contact's last name.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactTitle" class="form-label">Title/Position *</label>
+                                        <input type="text" class="form-control" id="contactTitle" name="contactTitle" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the contact's title.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactPhone" class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="contactPhone" name="contactPhone" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid phone number.
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="contactEmail" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="physicalAddress" class="form-label">Physical Address *</label>
+                                        <input type="text" class="form-control" id="physicalAddress" name="physicalAddress" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your physical address.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="city" class="form-label">City *</label>
+                                        <input type="text" class="form-control" id="city" name="city" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your city.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="state" class="form-label">State *</label>
+                                        <select class="form-select" id="state" name="state" required>
+                                            <option value="" selected disabled>Select State</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your state.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="zipCode" class="form-label">Zip Code *</label>
+                                        <input type="text" class="form-control" id="zipCode" name="zipCode" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your zip code.
+                                        </div>
+                                    </div>
 
-                                <!-- Step 3: Shelter Information -->
-                                <div class="form-step" id="step3" style="display: none;">
-                                    <h4 class="mb-4">Shelter Information</h4>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="facilityType" class="form-label">Facility Type *</label>
-                                            <select class="form-select" id="facilityType" required>
-                                                <option value="" selected disabled>Select Type</option>
-                                                <option value="physical">Physical Shelter</option>
-                                                <option value="foster">Foster-Based Only</option>
-                                                <option value="hybrid">Hybrid (Physical & Foster)</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select your facility type.
-                                            </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-step" id="step3" style="display: none;">
+                                <h4 class="mb-4">Shelter Information</h4>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="facilityType" class="form-label">Facility Type *</label>
+                                        <select class="form-select" id="facilityType" name="facilityType" required>
+                                            <option value="" selected disabled>Select Type</option>
+                                            <option value="physical">Physical Shelter</option>
+                                            <option value="foster">Foster-Based Only</option>
+                                            <option value="hybrid">Hybrid (Physical & Foster)</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select your facility type.
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="animalCapacity" class="form-label">Animal Capacity *</label>
-                                            <input type="number" class="form-control" id="animalCapacity" min="1" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your animal capacity.
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="animalCapacity" class="form-label">Animal Capacity *</label>
+                                        <input type="number" class="form-control" id="animalCapacity" name="animalCapacity" min="1" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your animal capacity.
                                         </div>
-                                        <div class="col-12">
+                                    </div>
+                                    <div class="col-12">
                                             <label class="form-label">Animals You Accept/Rescue (Select all that apply) *</label>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="acceptDogs" name="acceptedAnimals" value="dogs">
@@ -411,144 +396,89 @@
                                                 Please select at least one type of animal.
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <label for="adoptionProcess" class="form-label">Describe Your Adoption Process *</label>
-                                            <textarea class="form-control" id="adoptionProcess" rows="3" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please describe your adoption process.
-                                            </div>
+
+
+                                    <div class="col-12">
+                                        <label for="vetPartners" class="form-label">Veterinary Partners/Providers *</label>
+                                        <textarea class="form-control" id="vetPartners" name="vetPartners" rows="2" required></textarea>
+                                        <div class="invalid-feedback">
+                                            Please enter your veterinary partners.
                                         </div>
-                                        <div class="col-12">
-                                            <label for="adoptionFees" class="form-label">Adoption Fee Structure *</label>
-                                            <textarea class="form-control" id="adoptionFees" rows="3" placeholder="e.g., Dogs: $200, Puppies: $250, Cats: $125, Kittens: $150" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please enter your adoption fee structure.
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="vetPartners" class="form-label">Veterinary Partners/Providers *</label>
-                                            <textarea class="form-control" id="vetPartners" rows="2" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please enter your veterinary partners.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="annualAdoptions" class="form-label">Approximate Annual Adoptions *</label>
-                                            <input type="number" class="form-control" id="annualAdoptions" min="0" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your approximate annual adoptions.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="staffCount" class="form-label">Number of Staff/Volunteers *</label>
-                                            <input type="number" class="form-control" id="staffCount" min="1" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your staff count.
-                                            </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <label for="staffCount" class="form-label">Number of Staff/Volunteers *</label>
+                                        <input type="number" class="form-control" id="staffCount" name="staffCount" min="1" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your staff count.
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Step 4: Account Setup and Agreement -->
-                                <div class="form-step" id="step4" style="display: none;">
-                                    <h4 class="mb-4">Account Setup and Agreement</h4>
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="username" class="form-label">Username *</label>
-                                            <input type="text" class="form-control" id="username" required>
-                                            <div class="invalid-feedback">
-                                                Please choose a username.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="password" class="form-label">Password *</label>
-                                            <div class="input-group">
-                                                <input type="password" class="form-control" id="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
-                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Password must be at least 8 characters and include uppercase, lowercase, number, and special character.
-                                            </div>
-                                            <div class="form-text">
-                                                Must be at least 8 characters with uppercase, lowercase, number, and special character.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="confirmPassword" class="form-label">Confirm Password *</label>
-                                            <input type="password" class="form-control" id="confirmPassword" required>
-                                            <div class="invalid-feedback">
-                                                Passwords do not match.
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mt-4">
-                                            <label for="shelterLogo" class="form-label">Organization Logo (optional)</label>
-                                            <input type="file" class="form-control" id="shelterLogo" accept="image/*">
-                                            <div class="form-text">
-                                                Recommended size: 400x400 pixels, max 2MB.
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mt-4">
-                                            <div class="alert alert-info">
-                                                <h5><i class="bi bi-info-circle-fill me-2"></i> Required Documentation</h5>
-                                                <p class="mb-2">Please be prepared to provide the following documents during the verification process:</p>
-                                                <ul class="mb-0">
-                                                    <li>501(c)(3) determination letter (for non-profits)</li>
-                                                    <li>Business license or registration</li>
-                                                    <li>Proof of insurance</li>
-                                                    <li>Animal care facility license (if applicable)</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mt-3">
-                                            <div class="partner-agreement p-3 border rounded mb-3" style="max-height: 200px; overflow-y: auto;">
-                                                <h5>Shelter Partner Agreement</h5>
-                                                <p>By submitting this application and checking the box below, you agree to the following terms and conditions:</p>
-                                                <ol>
-                                                    <li>All information provided in this application is true and accurate to the best of your knowledge.</li>
-                                                    <li>Your organization complies with all applicable local, state, and federal laws and regulations regarding animal care and adoption.</li>
-                                                    <li>You will maintain accurate and up-to-date listings of your adoptable animals on the PAFS platform.</li>
-                                                    <li>You will respond to adoption inquiries and applications in a timely manner (within 2 business days).</li>
-                                                    <li>You will follow up on adoption outcomes and update the status of adopted animals on the platform.</li>
-                                                    <li>You will maintain appropriate standards of animal care, including providing necessary veterinary care, proper housing, nutrition, and socialization.</li>
-                                                    <li>You understand that PAFS reserves the right to remove listings or terminate partnerships that do not comply with our policies or standards of animal welfare.</li>
-                                                    <li>You agree to participate in the PAFS quality assurance program, which may include periodic reviews and site visits.</li>
-                                                    <li>You will notify PAFS of any significant changes to your organization, including changes in leadership, location, or operational status.</li>
-                                                    <li>You understand that this partnership can be terminated by either party with 30 days written notice.</li>
-                                                </ol>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-                                                <label class="form-check-label" for="agreeTerms">
-                                                    I have read and agree to the Shelter Partner Agreement *
-                                                </label>
-                                                <div class="invalid-feedback">
-                                                    You must agree to the terms to continue.
-                                                </div>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="checkbox" id="agreeUpdates">
-                                                <label class="form-check-label" for="agreeUpdates">
-                                                    I would like to receive updates about PAFS features, events, and resources
-                                                </label>
-                                            </div>
-                                        </div>
+                            <div class="form-step" id="step4" style="display: none;">
+
+
+                                <div class="col-12 mt-4">
+                                    <div class="alert alert-info">
+                                        <h5><i class="bi bi-info-circle-fill me-2"></i> Required Documentation</h5>
+                                        <p class="mb-2">Please be prepared to provide the following documents during the verification process:</p>
+                                        <ul class="mb-0">
+                                            <li>501(c)(3) determination letter (for non-profits)</li>
+                                            <li>Business license or registration</li>
+                                            <li>Proof of insurance</li>
+                                            <li>Animal care facility license (if applicable)</li>
+                                        </ul>
                                     </div>
                                 </div>
+                                <div class="col-12 mt-3">
+                                    <div class="partner-agreement p-3 border rounded mb-3" style="max-height: 200px; overflow-y: auto;">
+                                        <h5>Shelter Partner Agreement</h5>
+                                        <p>By submitting this application and checking the box below, you agree to the following terms and conditions:</p>
+                                        <ol>
+                                            <li>All information provided in this application is true and accurate to the best of your knowledge.</li>
+                                            <li>Your organization complies with all applicable local, state, and federal laws and regulations regarding animal care and adoption.</li>
+                                            <li>You will maintain accurate and up-to-date listings of your adoptable animals on the PAFS platform.</li>
+                                            <li>You will respond to adoption inquiries and applications in a timely manner (within 2 business days).</li>
+                                            <li>You will follow up on adoption outcomes and update the status of adopted animals on the platform.</li>
+                                            <li>You will maintain appropriate standards of animal care, including providing necessary veterinary care, proper housing, nutrition, and socialization.</li>
+                                            <li>You understand that PAFS reserves the right to remove listings or terminate partnerships that do not comply with our policies or standards of animal welfare.</li>
+                                            <li>You agree to participate in the PAFS quality assurance program, which may include periodic reviews and site visits.</li>
+                                            <li>You will notify PAFS of any significant changes to your organization, including changes in leadership, location, or operational status.</li>
+                                            <li>You understand that this partnership can be terminated by either party with 30 days written notice.</li>
+                                        </ol>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                        <label class="form-check-label" for="agreeTerms">
+                                            I have read and agree to the Shelter Partner Agreement *
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree to the terms to continue.
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="agreeUpdates" name="agreeUpdates">
+                                        <label class="form-check-label" for="agreeUpdates">
+                                            I would like to receive updates about PAFS features, events, and resources
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        
 
-                                <!-- Submit Button (only visible on last step) -->
-                                <div class="mt-4 text-center" id="submitButtonContainer" style="display: none;">
+                         <!-- Submit Button (only visible on last step) -->
+                         <div class="mt-4 text-center" id="submitButtonContainer" style="display: none;">
                                     <button type="submit" class="btn btn-primary btn-lg px-5">Submit Application</button>
                                 </div>
-                            </form>
+                        </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- FAQ Section -->
@@ -893,26 +823,12 @@
                 togglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
             });
             
-            // Form submission
-            const shelterSignupForm = document.getElementById('shelterSignupForm');
-            
-            shelterSignupForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                if (shelterSignupForm.checkValidity()) {
-                    // Here you would normally send the form data to your server
-                    alert('Thank you for your application! We will review your information and contact you soon.');
-                    // Redirect to thank you page or reset form
-                    window.location.href = 'index.html';
-                } else {
-                    // Trigger validation display
-                    shelterSignupForm.classList.add('was-validated');
-                }
-            });
+
+
             
             // Initialize the form
             showStep(currentStep);
-        });
+            });
     </script>
 </body>
 </html>

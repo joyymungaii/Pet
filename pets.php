@@ -4,6 +4,7 @@ $servername = "localhost";
 $username = "root"; // Replace with your XAMPP database username
 $password = "";     // Replace with your XAMPP database password
 $dbname = "pet_adoption"; // Replace with your database name
+$response ="";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -96,7 +97,16 @@ $conn->close();
     <?php
         include('navbar.php');
     ?>
-
+    <div class="col-lg-3 mb-3">
+        <button class="btn btn-success">
+        <?php
+            if (isset($_GET['message'])) {
+                $message = urldecode($_GET['message']); // Decode the URL-encoded message
+                echo "<p>{$message}</p>"; // Display the message
+            }
+        ?>
+        </button>        
+    </div>
     <header class="bg-primary text-white py-4">
         <div class="container">
             <h1>Find Your Perfect Pet</h1>

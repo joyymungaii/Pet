@@ -120,14 +120,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnsubmit'])) {
     $agreedTerms, $agreedHomeVisit, $agreedUpdates, $additionalComments
 );
         if ($stmt->execute()) {
-            header('Location: pets.php');
-            echo "<div class='alert alert-success' role='alert'>Foster application data submitted successfully!</div>";
-            
-        
+            $response = "Application submitted successfully!";
+            // Use urlencode to safely pass the message in the URL
+            header("Location: pets.php?message=" . urlencode($response));
+            exit();
         } else {
-            echo "<div class='alert alert-danger' role='alert'>Error submitting data: " . $stmt->error . "</div>";
+            $response = "Error: " . $sql . "<br>" . $conn->error;
+            header("Location: shelter-signup.php?message=" . urlencode($response));
+            exit();
         }
-        $stmt->close();
     } else {
         echo "<div class='alert alert-danger' role='alert'>SQL prepare failed: " . $conn->error . "</div>";
     }
