@@ -40,7 +40,7 @@ if (isset($_POST['create_account'])) {
 
     if ($stmt->execute()) {
         // Redirect to login page
-        header("Location: login.html");
+        header("Location: login.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;
